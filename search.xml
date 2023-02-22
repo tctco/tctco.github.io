@@ -4,11 +4,24 @@
   
     
     <entry>
+      <title>配准问题</title>
+      <link href="/2023/02/22/%E9%85%8D%E5%87%86%E9%97%AE%E9%A2%98/"/>
+      <url>/2023/02/22/%E9%85%8D%E5%87%86%E9%97%AE%E9%A2%98/</url>
+      
+        <content type="html"><![CDATA[<p><a href="http://nghiaho.com/?page_id=671">http://nghiaho.com/?page_id=671</a><br><a href="https://www.jianshu.com/p/c2d0c743dc5d">https://www.jianshu.com/p/c2d0c743dc5d</a></p>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>SPM学习笔记</title>
       <link href="/2023/02/20/SPM%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
       <url>/2023/02/20/SPM%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
       
-        <content type="html"><![CDATA[<p>开启<code>SPM12</code></p><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">spm pet</span><br></pre></td></tr></table></figure><h2 id="基本操作">基本操作</h2><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">I = dicomread(dicomFile)</span><br><span class="line">imshow(I, <span class="string">&#x27;DisplayRange&#x27;</span>, []) <span class="comment">% 显示DICOM图像</span></span><br><span class="line"></span><br><span class="line">info = dicominfo(dicomFile) <span class="comment">% 显示元信息</span></span><br><span class="line"><span class="comment">% info.AcquisitionTime较重要</span></span><br></pre></td></tr></table></figure><p>计算SUV：使用<code>ImCalc</code>输入计算公式后，<code>Display</code>选中计算结果</p><h2 id="图像预处理">图像预处理</h2><ol><li>Spatial Registration, Normalization<ol><li>Registration: Rigid Transformations (rotations, translations…)</li><li>Normalization: Transform to Montreal Neurology Institute (MNI) Template</li><li>Smoothing: e.g. Gaussian kernel, improve SNR, minimize differences between normalized images, increase validity of statistics (errors more likely to be normally distributed)</li></ol></li><li>Creation of a Parametric Image (SUVRs, DVRs, BP…)</li><li>Statistical model</li></ol><p>具体实施步骤</p><ol><li>SPM导入DICOM文件并设置输出路径</li><li>在Display中调整（一般将原点设置为前连合anterior commissure），点击reorient确认</li></ol>]]></content>
+        <content type="html"><![CDATA[<p>开启<code>SPM12</code></p><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">spm pet</span><br></pre></td></tr></table></figure><h2 id="基本操作">基本操作</h2><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">I = dicomread(dicomFile)</span><br><span class="line">imshow(I, <span class="string">&#x27;DisplayRange&#x27;</span>, []) <span class="comment">% 显示DICOM图像</span></span><br><span class="line"></span><br><span class="line">info = dicominfo(dicomFile) <span class="comment">% 显示元信息</span></span><br><span class="line"><span class="comment">% info.AcquisitionTime较重要</span></span><br></pre></td></tr></table></figure><p>计算SUV：使用<code>ImCalc</code>输入计算公式后，<code>Display</code>选中计算结果</p><h2 id="图像预处理">图像预处理</h2><ol><li>Spatial Registration, Normalization<ol><li>Registration: Rigid Transformations (rotations, translations…)</li><li>Normalization: Transform to Montreal Neurology Institute (MNI) Template</li><li>Smoothing: e.g. Gaussian kernel, improve SNR, minimize differences between normalized images, increase validity of statistics (errors more likely to be normally distributed)</li></ol></li><li>Creation of a Parametric Image (SUVRs, DVRs, BP…)</li><li>Statistical model</li></ol><p>具体实施步骤</p><ol><li>SPM导入DICOM文件并设置输出路径</li><li>在Display中调整（一般将原点设置为前连合anterior commissure），点击reorient确认</li></ol><h2 id="The-Flanker-Task">The Flanker Task</h2>]]></content>
       
       
       <categories>
