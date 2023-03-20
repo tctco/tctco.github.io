@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    body {font-family: 'Times New Roman', SimSun;}
+    .bg {
+      background-image: url(./bg.jpg);
+      background-position: center center;
+      background-color: black;
+      height: 85.5mm;
+      width: 54mm;
+      background-size: cover;
+      text-align: center;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    img {
+      width: 2.5cm;
+      height: 3.5cm;
+      margin-top: -2mm;
+      object-position: center;
+      object-fit:cover;
+    }
+
+    .info {
+      font-size: .9em;
+      margin: 0.1cm;
+      font-weight: 600;
+    }
+
+    label {display: block;}
+  </style>
+</head>
+
+<body>
+  <div>
+  <div style="display: flex;">
+    <div class="bg bgfront">
+      <div style="width: 100%;height: 100%;" class="container">
+        <p style="font-size: 1.5em; font-weight: 650; margin-bottom: 0; margin-top: 1.2cm;">工作证</p>
+        <p style="font-size: .8em; margin-top: -1mm;">Working Card</p>
+        <img src="./cat.webp" id="profile">
+        <div class="info">部门：<div
+            style="border-bottom: 1.5px solid black; min-width: 1.4cm; display: inline-block; padding-left: 3mm; padding-right:3mm; text-align: justify; text-align-last: justify;" id="job">
+            学术部</div>
+        </div>
+        <div class="info">姓名：<div
+            style="border-bottom: 1.5px solid black; min-width: 1.4cm; display: inline-block; padding-left: 3mm; padding-right:3mm; text-align: justify; text-align-last: justify;" id="name">
+            猫猫</div>
+        </div>
+        <p style="font-size: .6em; margin-top: 4mm; font-weight: 500;" id="footer">第一临床学院学生会</p>
+      </div>
+    </div>
+    <div class="bg bgback">
+      <div style="z-index: 9999; width: 100%;height: 100%; display:flex; justify-content: center; align-items: center;" class="container">
+        <div style="display:flex; justify-content: center;">
+          <p style="font-size: 2em; font-weight: 600; writing-mode: vertical-lr; margin-right: 0;">
+            工作人员</p>
+          <p style="font-size: 1em; font-weight: 500; writing-mode: vertical-lr; margin-left: 0;">
+            WORKING CARD</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <label>前面的背景图
+    <input type="file" accept="image/*" id="bgfront-input">
+  </label>
+  <label>后面的背景图
+    <input type="file" accept="image/*" id="bgback-input">
+  </label>
+  <label>一寸证件照
+    <input type="file" accept="image/*" id="profile-input">
+  </label>
+  <label>部门
+    <input type="text" id="job-input">
+  </label>
+  <label>姓名
+    <input type="text" id="name-input">
+  </label>
+  <label>脚标<input type="text" id="footer-input"></label>
+  <label>开启背景模糊<input type="checkbox" id="blur-input"></label>
+  </div>
+  请按ctrl+p打印，在弹出对话框中找到“更多设置”中，并勾选“背景图形”。否则背景图不能打印。
+  <script>
+    const bgFrontInput = document.getElementById('bgfront-input');
+    const bgBackInput = document.getElementById('bgback-input');
+    const profileInput = document.getElementById('profile-input');
+    const nameInput = document.getElementById('name-input');
+    const jobInput = document.getElementById('job-input');
+    const footerInput = document.getElementById('footer-input');
+    const blurInput = document.getElementById('blur-input');
+    function changeBg(selector) {
+      return (e) => {
+        let fr = new FileReader();
+        fr.onload = function () {
+          document.querySelector(selector).style.backgroundImage = `url(${fr.result})`;
+        }
+        fr.readAsDataURL(e.target.files[0])
+      }
+    }
+    bgFrontInput.addEventListener('change', changeBg('.bgfront'));
+    bgBackInput.addEventListener('change', changeBg('.bgback'));
+    profileInput.addEventListener('change', (e) => {
+      let fr = new FileReader();
+      fr.onload = function () {
+        document.getElementById('profile').src = fr.result;
+      }
+      fr.readAsDataURL(e.target.files[0])
+    })
+    nameInput.addEventListener('change', (e) => {
+      document.getElementById('name').innerText = e.target.value;
+    })
+    jobInput.addEventListener('change', (e) => {
+      document.getElementById('job').innerText = e.target.value;
+    })
+    footerInput.addEventListener('change', (e) => {
+      document.getElementById('footer').innerText = e.target.value;
+    })
+    blurInput.addEventListener('change', (e) => {
+      const checked = document.getElementById('blur-input').checked;
+      let containers = document.getElementsByClassName('container')
+      if (checked) {
+        for (let i = 0; i < containers.length; i++) {
+          containers[i].style.backdropFilter = 'blur(2px)';
+        }
+      } else {
+        for (let i = 0; i < containers.length; i++) {
+          containers[i].style.backdropFilter = 'none';
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>
