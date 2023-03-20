@@ -7,6 +7,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
   <style>
+    @media print {
+      .pagebreak {
+        page-break-before: always;
+      }
+    }
+
     body {
       font-family: 'Times New Roman', SimSun;
       margin: 0;
@@ -47,7 +53,7 @@
 
 <body>
   <div>
-    <div class="bg bgfront" style="break-after: page;" id="0">
+    <div class="bg bgfront" id="0">
       <div style="width: 100%;height: 100%;" class="container">
         <p style="font-size: 1.5em; font-weight: 650; margin-bottom: 3mm; margin-top: 1.4cm;">工 作 证</p>
         <!-- <p style="font-size: .8em; margin-top: -1mm;">Working Card</p> -->
@@ -65,7 +71,7 @@
         <p style="font-size: .6em; margin-top: 7mm; font-weight: 500;" class="footer">第一临床学院学生会</p>
       </div>
     </div>
-    <div>
+    <div class="pagebreak">
       <div class="bg bgback"
         style="background-image: url(./logo.jpg); background-size: contain; background-repeat: no-repeat;">
         <div
@@ -136,13 +142,13 @@
       profileInput.addEventListener('change', (e) => {
         let len = e.target.files.length;
         for (let i = 0; i < len - 1; i++) {
-            const elem = document.getElementById(`${i}`);
-            let clone = elem.cloneNode(true);
-            clone.id = i + 1
-            elem.after(clone);
-            const elem2 = document.querySelector(`.bgback`);
-            let clone2 = elem2.cloneNode(true);
-            elem2.after(clone2)
+          const elem = document.getElementById(`${i}`);
+          let clone = elem.cloneNode(true);
+          clone.id = i + 1
+          elem.after(clone);
+          const elem2 = document.querySelector(`.bgback`);
+          let clone2 = elem2.cloneNode(true);
+          elem2.after(clone2)
         }
         let profiles = document.getElementsByClassName('profile')
         for (let i = 0; i < len; i++) {
@@ -153,7 +159,7 @@
       })
       nameInput.addEventListener('change', (e) => {
         let names = e.target.value.split(' ');
-        
+
         let nameElements = document.getElementsByClassName('name');
         for (let i = 0; i < Math.min(names.length, nameElements.length); i++) {
           nameElements[i].innerText = names[i];
@@ -167,8 +173,8 @@
         }
       })
       footerInput.addEventListener('change', (e) => {
-         let footers = document.getElementsByClassName('footer')
-         for (let i = 0; i < footers.length; i++) footers[i].innerText = e.target.value;
+        let footers = document.getElementsByClassName('footer')
+        for (let i = 0; i < footers.length; i++) footers[i].innerText = e.target.value;
       })
       blurInput.addEventListener('change', (e) => {
         const checked = document.getElementById('blur-input').checked;
