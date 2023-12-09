@@ -72,7 +72,8 @@
       margin-top: 1.7cm;
     }
 
-    .footer {
+    .footer,
+    .ffooter {
       font-size: .6em;
       /* margin-top: 7mm; */
       margin-top: 7mm;
@@ -97,16 +98,20 @@
   <div style="width: 100%; text-align:center;">
     <div class="bg bgfront" id="0">
       <div style="width: 100%;height: 100%;" class="container">
-        <p class="title">工 作 证</p>
+        <p class="title" style="opacity: 0;">工 作 证</p>
         <!-- <p style="font-size: .8em; margin-top: -1mm;">Working Card</p> -->
-        <img src="./cat.webp" class="profile">
-        <div class="info">部门：<div class="job">
+        <img src="./cat.webp" class="profile" style="margin-top: -3mm;">
+        <!-- <div class="info">部门：<div class="job">
             学术部</div>
-        </div>
-        <div class="info">姓名：<div class="name">
+        </div> -->
+        <div class="info" style="margin-top: -2mm; font-size: 1.3em;">
+          <div class="name"
+            style="border-bottom: none; color: #295a7a; font-family: 'Microsoft YaHei'; font-weight: 600;">
             猫猫</div>
         </div>
-        <p class="footer">第一临床学院学生会</p>
+        <p class="footer" style="font-size: 1em; margin-top: 0mm; font-family: 'Microsoft YaHei';">2017级临床医学八年制
+        </p>
+        <p class="ffooter" style="font-size: 1em; margin-top: -4mm; font-family: 'Microsoft YaHei';">团支部</p>
       </div>
     </div>
     <div class="pagebreak" style="direction: rtl;">
@@ -117,7 +122,7 @@
           style="z-index: 9999; width: 100%;height: 100%; display:flex; justify-content: center; align-items: center;"
           class="container">
           <div style="display:flex; justify-content: center;">
-            <img src="./logo-removebg-preview.png" style="mix-blend-mode: multiply; width: 3cm;">
+            <!-- <img src="./logo-removebg-preview.png" style="mix-blend-mode: multiply; width: 3cm;"> -->
             <!-- <p style="font-size: 2em; font-weight: 600; writing-mode: vertical-lr; margin-right: 0;">
             工作人员</p>
           <p style="font-size: 1em; font-weight: 500; writing-mode: vertical-lr; margin-left: 0;">
@@ -136,7 +141,7 @@
       <label>后面的背景图
         <input type="file" accept="image/*" id="bgback-input">
       </label>
-      <label>一寸证件照
+      <label>一寸证件照（命名格式："部门 姓名.扩展名"）
         <input type="file" accept="image/*" id="profile-input" multiple>
       </label>
       <label>部门
@@ -192,10 +197,12 @@
         let profiles = document.getElementsByClassName('profile')
         let jobElements = document.getElementsByClassName('job');
         let nameElements = document.getElementsByClassName('name');
+        let footerElements = document.getElementsByClassName('footer');
         for (let i = 0; i < len; i++) {
           let fr = new FileReader();
           const [job, name] = e.target.files[i].name.split('.')[0].split(' ')
-          jobElements[i].innerText = job;
+          // jobElements[i].innerText = job;
+          footerElements[i].innerText = job;
           nameElements[i].innerText = name;
           fr.onload = () => profiles[i].src = fr.result;
           fr.readAsDataURL(e.target.files[i])
