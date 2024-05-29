@@ -4,6 +4,19 @@
   
     
     <entry>
+      <title>MOT格式笔记</title>
+      <link href="/2024/05/08/MOT%E6%A0%BC%E5%BC%8F%E7%AC%94%E8%AE%B0/"/>
+      <url>/2024/05/08/MOT%E6%A0%BC%E5%BC%8F%E7%AC%94%E8%AE%B0/</url>
+      
+        <content type="html"><![CDATA[<p>需要注意的是</p><ul><li>MOT的标准格式为frame, id, x, y, w, h, …</li><li>mmdetection/segTracker的返回一般为xyxy</li></ul>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>SuStaIn学习笔记</title>
       <link href="/2024/01/19/SuStaIn%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
       <url>/2024/01/19/SuStaIn%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
