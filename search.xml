@@ -4,6 +4,32 @@
   
     
     <entry>
+      <title>在WSL2中安装SPM12 Standalone</title>
+      <link href="/2024/10/30/%E5%9C%A8WSL2%E4%B8%AD%E5%AE%89%E8%A3%85SPM12-Standalone/"/>
+      <url>/2024/10/30/%E5%9C%A8WSL2%E4%B8%AD%E5%AE%89%E8%A3%85SPM12-Standalone/</url>
+      
+        <content type="html"><![CDATA[<ol><li>在<a href="https://www.fil.ion.ucl.ac.uk/spm/download/restricted/utopia/MCR/">这个链接</a>下载MATLAB Compiler Runtime</li><li>在<a href="https://www.fil.ion.ucl.ac.uk/spm/download/restricted/utopia/spm12/">这个连接</a>下载SPM Standalone</li><li>运行<code>./MCRInstaller.bin</code>的时候遇到 No Java Runtime Environment(JRE) was found on this system. 使用<code>sudo apt install openjdk-11-jre</code>尝试解决，发现解决不了！可以去看<a href="https://www.jiscmail.ac.uk/cgi-bin/webadmin?A2=SPM;302f92a5.2002">这个讨论</a></li><li></li></ol>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>绝妙口诀一览</title>
+      <link href="/2024/10/08/%E7%BB%9D%E5%A6%99%E5%8F%A3%E8%AF%80%E4%B8%80%E8%A7%88/"/>
+      <url>/2024/10/08/%E7%BB%9D%E5%A6%99%E5%8F%A3%E8%AF%80%E4%B8%80%E8%A7%88/</url>
+      
+        <content type="html"><![CDATA[<blockquote><p>网罗医学绝妙口诀</p></blockquote><p><strong>头孢代数口诀</strong></p><ul><li><p>坐着拉大便</p><ul><li>坐：头孢唑林</li><li>拉：头孢拉定</li><li>便：头孢氨苄、头孢羟氨苄</li></ul></li><li><p><strong>克夫多可惜</strong></p><ul><li>克：头孢克洛</li><li>夫：头孢呋辛</li><li>多：头孢孟多</li></ul></li><li><p><strong>他派我去出差</strong></p><ul><li>他：头孢他啶</li><li>派：头孢哌酮</li><li>我：头孢克肟</li><li>去：头孢曲松</li></ul></li><li><p><strong>比我厉害</strong></p><ul><li>比我：头孢吡肟、头孢匹罗</li></ul></li></ul><p><strong>脑出血MRI信号转变3-7法则</strong>：I Bleed, I Die, Bleed Die, Bleed Bleed, Die Die</p><table><thead><tr><th>分期</th><th>出血时间</th><th>T1</th><th>T2</th></tr></thead><tbody><tr><td>超急性期</td><td>&lt;7h</td><td>等信号Isointense, I</td><td>高信号Bright, B</td></tr><tr><td>急性期</td><td>3h-3d</td><td>I</td><td>D</td></tr><tr><td>亚急性早期</td><td>3d-7d</td><td>B</td><td>D</td></tr><tr><td>亚急性晚期</td><td>7d-3w</td><td>B</td><td>B</td></tr><tr><td>慢性期</td><td>&gt;3w</td><td>D</td><td>D</td></tr></tbody></table><h1>影像征象</h1><ul><li>牛眼征：转移性肝癌典型表现</li></ul>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>ADNI学习笔记</title>
       <link href="/2024/07/23/ADNI%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
       <url>/2024/07/23/ADNI%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
