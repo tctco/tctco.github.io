@@ -4,6 +4,19 @@
   
     
     <entry>
+      <title>解决docker镜像拉取问题</title>
+      <link href="/2024/11/05/%E8%A7%A3%E5%86%B3docker%E9%95%9C%E5%83%8F%E6%8B%89%E5%8F%96%E9%97%AE%E9%A2%98/"/>
+      <url>/2024/11/05/%E8%A7%A3%E5%86%B3docker%E9%95%9C%E5%83%8F%E6%8B%89%E5%8F%96%E9%97%AE%E9%A2%98/</url>
+      
+        <content type="html"><![CDATA[<p>docker拉取镜像的时候经常断，之前解决过一次，结果忘了，又折腾一遍。所以写个短小的笔记记录一下</p><p>首先遇到了这个问题：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ailed to solve: nginx:alpine: failed to copy: httpReadSeeker: failed open: failed to do request: Get &quot;https://production.cloudflare.docker.com/registry-v2/docker/registry/v2/blobs/sha256/cb/cb8f91112b6b50ead202f48bbf81cec4b34c254417254efd94c803f7dd718045/data?verify=1730801617-FU3heZxDeHwA43OyZBn3i%2BkKwM0%3D&quot;: dialing production.cloudflare.docker.com:443 matches manual override exclude: connecting to 173.252.108.3:443: dial tcp 173.252.108.3:443: connectex: A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond.</span><br></pre></td></tr></table></figure><p>或者是此类问题</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ERROR: failed to solve: DeadlineExceeded: context deadline exceeded</span><br></pre></td></tr></table></figure><p>一个比较容易想到的解决办法是在docker desktop里面设置</p><p><img src="https://raw.githubusercontent.com/tctco/ImgHosting/master/20241105173052.png" alt="docker engine desktop proxy settings"></p><p>但是试了下不知道为啥不能用，可能是得在wsl里面设置？遂用如下代码</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line">host_ip=$(ip route show | grep -i default | awk <span class="string">&#x27;&#123; print $3&#125;&#x27;</span>)</span><br><span class="line"><span class="built_in">export</span> ALL_PROXY=<span class="string">&quot;http://<span class="variable">$host_ip</span>:10809&quot;</span></span><br><span class="line"><span class="built_in">export</span> HTTPS_PROXY=<span class="string">&quot;http://<span class="variable">$host_ip</span>:10809&quot;</span></span><br><span class="line"><span class="built_in">export</span> HTTP_PROXY=<span class="string">&quot;http://<span class="variable">$host_ip</span>:10809&quot;</span></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$ALL_PROXY</span></span><br><span class="line"><span class="built_in">alias</span> proxy=<span class="string">&quot;export ALL_PROXY=http://<span class="variable">$host_ip</span>:10809; export HTTPS_PROXY=http://<span class="variable">$host_ip</span>:10809; export HTTP_PROXY=http://<span class="variable">$host_ip</span>:10809&quot;</span></span><br><span class="line"><span class="built_in">alias</span> unproxy=<span class="string">&quot;unset ALL_PROXY; unset HTTPS_PROXY; unset HTTP_PROXY&quot;</span></span><br></pre></td></tr></table></figure><p>这里还有个需要注意的地方，就是只设置<code>ALL_PROXY</code>是不管用的，docker似乎会拉取<code>HTTP(S)_PROXY</code>的值，所以还必须把他俩设置了。</p>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>在WSL2中安装SPM12 Standalone</title>
       <link href="/2024/10/30/%E5%9C%A8WSL2%E4%B8%AD%E5%AE%89%E8%A3%85SPM12-Standalone/"/>
       <url>/2024/10/30/%E5%9C%A8WSL2%E4%B8%AD%E5%AE%89%E8%A3%85SPM12-Standalone/</url>
