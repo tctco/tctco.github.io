@@ -1,0 +1,299 @@
+<!doctype html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>LightHouse | Pure Rings</title>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+        <link
+            href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&display=swap"
+            rel="stylesheet"
+        />
+        <style>
+            body {
+                margin: 0;
+                background-color: #000;
+                color: #fff;
+                overflow-x: hidden;
+                font-family: "Playfair Display", serif;
+            }
+
+            #scroll-container {
+                height: 400vh;
+                width: 100%;
+            }
+
+            #canvas-container {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                z-index: 1;
+            }
+
+            #ui-layer {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                z-index: 10;
+                pointer-events: none;
+                display: flex;
+                align-items: center;
+                justify-content: flex-end;
+                padding-right: 8vw;
+                box-sizing: border-box;
+                mix-blend-mode: difference;
+            }
+
+            h1 {
+                font-size: 15vw;
+                line-height: 0.8;
+                font-weight: 900;
+                text-align: right;
+                margin: 0;
+                color: #fff;
+                opacity: 0;
+                transform: translateX(50px);
+                letter-spacing: -0.03em;
+            }
+
+            .scroll-hint {
+                position: fixed;
+                bottom: 40px;
+                left: 50%;
+                transform: translateX(-50%);
+                color: #fff;
+                font-family: "Arial", sans-serif;
+                font-size: 10px;
+                letter-spacing: 6px;
+                z-index: 20;
+                mix-blend-mode: difference;
+                opacity: 0.5;
+                text-transform: uppercase;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="scroll-container"></div>
+        <div id="canvas-container"></div>
+
+        <div id="ui-layer">
+            <h1 id="main-title">LIGHT<br />HOUSE</h1>
+        </div>
+
+        <div class="scroll-hint">Scroll to Approach</div>
+
+        <!-- Vertex Shader -->
+        <script type="x-shader/x-vertex" id="vertexShader">
+            varying vec2 vUv;
+            void main() {
+                vUv = uv;
+                gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+            }
+        </script>
+
+        <!-- Fragment Shader -->
+        <script type="x-shader/x-fragment" id="fragmentShader">
+            uniform float uTime;      // 仅用于噪点
+            uniform float uOffset;    // 替代 uTime 用于控制波纹相位，支持变速
+            uniform vec2 uResolution;
+            uniform vec2 uLightPos;
+            uniform float uFrequency;
+            uniform float uThickness;
+            uniform float uProgress;  // 新增：接收滚动进度用于控制衰减
+
+            void main() {
+                vec2 st = gl_FragCoord.xy / uResolution.xy;
+                float aspect = uResolution.x / uResolution.y;
+
+                vec2 toLight = st - uLightPos;
+                toLight.x *= aspect;
+
+                float dist = length(toLight);
+
+                // 波动生成
+                // 使用累积的 uOffset 作为相位，不再直接乘以 uTime
+                // pattern = fract(dist * freq - offset)
+                float pattern = fract(dist * uFrequency - uOffset);
+
+                // 线条处理
+                float ring = smoothstep(0.5, 0.52, pattern) - smoothstep(0.5 + uThickness, 0.52 + uThickness, pattern);
+
+                // 物理衰减逻辑优化
+                // 基础衰减：符合物理规律，越远越暗
+                // 动态调整衰减系数：
+                // 初始时 (uProgress = 0) 系数设为 20.0，使光环紧缩在光源附近
+                // 随着推进 (uProgress -> 1)，系数降至 1.5，光环范围变大
+                float decay = mix(15.0, 1.5, uProgress);
+
+                // 基础衰减
+                float baseAttenuation = 1.0 / (dist * decay * decay + 0.1);
+
+                // 阈值截断：如果强度低于 0.02，直接归零，不渲染
+                // if (baseAttenuation < 0.02) baseAttenuation = 0.0;
+
+                // 最终衰减：随着 uProgress 接近 1.0 (底部)，混合权重偏向 1.0 (无衰减)
+                // 使用 smoothstep(0.5, 1.0, uProgress) 让这个效果在滚动的后半程才逐渐显现
+                // 当到达底部时，attenuation = 1.0，光环在屏幕边缘也是纯白的
+                float attenuation = mix(baseAttenuation, 1.0, smoothstep(0.5, 1.0, uProgress));
+
+                // 【移除核心】
+                // 去掉了 core 计算，直接只渲染 ring
+                // 现在的光源中心是空的（或者说是黑的），只有向外扩散的波
+
+                vec3 color = vec3(ring * attenuation);
+
+                // 噪点
+                float noise = fract(sin(dot(st.xy, vec2(12.9898,78.233))) * 43758.5453);
+                color += noise * 0.03;
+
+                gl_FragColor = vec4(color, 1.0);
+            }
+        </script>
+
+        <script>
+            const container = document.getElementById("canvas-container");
+            const scene = new THREE.Scene();
+            scene.background = new THREE.Color(0x000000);
+
+            const camera = new THREE.PerspectiveCamera(
+                75,
+                window.innerWidth / window.innerHeight,
+                0.1,
+                1000,
+            );
+            camera.position.z = 1;
+
+            const renderer = new THREE.WebGLRenderer({ antialias: true });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+            container.appendChild(renderer.domElement);
+
+            const planeGeo = new THREE.PlaneGeometry(4, 4);
+            const uniforms = {
+                uTime: { value: 0 },
+                uOffset: { value: 0 }, // 新增：控制波纹位移
+                uResolution: {
+                    value: new THREE.Vector2(
+                        window.innerWidth,
+                        window.innerHeight,
+                    ),
+                },
+                uLightPos: { value: new THREE.Vector2(0.5, 0.5) },
+                uFrequency: { value: 5.0 },
+                uThickness: { value: 0.2 },
+                uProgress: { value: 0 }, // 新增：传递进度
+            };
+
+            const shaderMat = new THREE.ShaderMaterial({
+                vertexShader:
+                    document.getElementById("vertexShader").textContent,
+                fragmentShader:
+                    document.getElementById("fragmentShader").textContent,
+                uniforms: uniforms,
+                depthTest: false,
+                depthWrite: false,
+            });
+
+            const bgPlane = new THREE.Mesh(planeGeo, shaderMat);
+            scene.add(bgPlane);
+
+            // --- Logic ---
+            let targetProgress = 0;
+            let currentProgress = 0;
+            let accumulatedOffset = 0; // 用于累加位移
+
+            const titleEl = document.getElementById("main-title");
+
+            window.addEventListener("scroll", () => {
+                const maxScroll =
+                    document.body.scrollHeight - window.innerHeight;
+                targetProgress = Math.min(
+                    Math.max(window.scrollY / maxScroll, 0),
+                    1,
+                );
+            });
+
+            window.addEventListener("resize", () => {
+                renderer.setSize(window.innerWidth, window.innerHeight);
+                uniforms.uResolution.value.set(
+                    window.innerWidth,
+                    window.innerHeight,
+                );
+            });
+
+            const clock = new THREE.Clock();
+
+            function animate() {
+                // 获取两帧之间的时间差 (秒)
+                const delta = clock.getDelta();
+
+                // 阻尼效果
+                currentProgress += (targetProgress - currentProgress) * 0.05;
+
+                // 实时更新 Shader 中的进度参数
+                uniforms.uProgress.value = currentProgress;
+
+                // --- 动态速度控制 ---
+                // 远 (Top, progress=0): 速度快 (2.0)
+                // 近 (Bottom, progress=1): 速度慢 (0.2)
+                // 这样随着画面放大，波纹向外扩散的速度视觉上会变慢，显得更巨大
+                const startSpeed = 1.0;
+                const endSpeed = 0.3;
+                const currentSpeed =
+                    startSpeed + (endSpeed - startSpeed) * currentProgress;
+
+                // 累加位移
+                accumulatedOffset += delta * currentSpeed;
+                uniforms.uOffset.value = accumulatedOffset;
+
+                // 传递总时间给噪点使用
+                uniforms.uTime.value = clock.getElapsedTime();
+
+                // --- 其他参数 ---
+
+                // 1. 密度 (Frequency)
+                const startFreq = 15.0;
+                const endFreq = 1.0;
+                uniforms.uFrequency.value =
+                    startFreq +
+                    (endFreq - startFreq) * Math.pow(currentProgress, 0.5);
+
+                // 2. 线条粗细 (Thickness)
+                const startThick = 0.1;
+                const endThick = 0.6;
+                uniforms.uThickness.value =
+                    startThick +
+                    (endThick - startThick) * Math.pow(currentProgress, 0.5);
+
+                // 3. 光源位置移动
+                const startX = 1.0;
+                const startY = 1.0;
+                const endX = 0.2;
+                const endY = 0.3;
+
+                uniforms.uLightPos.value.set(
+                    startX + (endX - startX) * currentProgress,
+                    startY + (endY - startY) * currentProgress,
+                );
+
+                // 4. UI 动画
+                if (currentProgress > 0.5) {
+                    titleEl.style.opacity = (currentProgress - 0.5) * 3;
+                    const transX = 50 * (1 - (currentProgress - 0.5) * 2.5);
+                    titleEl.style.transform = `translateX(${Math.max(0, transX)}px)`;
+                } else {
+                    titleEl.style.opacity = 0;
+                }
+
+                renderer.render(scene, camera);
+                requestAnimationFrame(animate);
+            }
+
+            animate();
+        </script>
+    </body>
+</html>

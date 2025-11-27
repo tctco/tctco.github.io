@@ -1,0 +1,348 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Transport and Application Layers | TeaPort</title><meta name="author" content="Cheng,tctco2018@gmail.com"><meta name="copyright" content="Cheng"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Google crash course  Transport and Application Layers Intro Transport layer: Allows traffic to be directed to specific network applications. Application layer: Allows these applications to communicat">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Transport and Application Layers">
+<meta property="og:url" content="https://tctco.github.io/2019/06/05/Transport-and-Application-Layers/index.html">
+<meta property="og:site_name" content="TeaPort">
+<meta property="og:description" content="Google crash course  Transport and Application Layers Intro Transport layer: Allows traffic to be directed to specific network applications. Application layer: Allows these applications to communicat">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://tctco.github.io/images/tardis.png">
+<meta property="article:published_time" content="2019-06-05T01:08:36.000Z">
+<meta property="article:modified_time" content="2025-11-27T12:11:30.945Z">
+<meta property="article:author" content="Cheng">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://tctco.github.io/images/tardis.png"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Transport and Application Layers",
+  "url": "https://tctco.github.io/2019/06/05/Transport-and-Application-Layers/",
+  "image": "https://tctco.github.io/images/tardis.png",
+  "datePublished": "2019-06-05T01:08:36.000Z",
+  "dateModified": "2025-11-27T12:11:30.945Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Cheng",
+      "url": "https://tctco.github.io"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/images/favicon.png"><link rel="canonical" href="https://tctco.github.io/2019/06/05/Transport-and-Application-Layers/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.5.3-b2"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.12.0/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Transport and Application Layers',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><link rel="stylesheet" href="//at.alicdn.com/t/c/font_3878240_kz3gpk6zi4c.css"><link rel="stylesheet" href="/static/css/bilibili.css"><meta name="generator" content="Hexo 6.3.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><script>(()=>{
+  const $loadingBox = document.getElementById('loading-box')
+  const $body = document.body
+  const preloader = {
+    endLoading: () => {
+      if ($loadingBox.classList.contains('loaded')) return
+      $body.style.overflow = ''
+      $loadingBox.classList.add('loaded')
+    },
+    initLoading: () => {
+      $body.style.overflow = 'hidden'
+      $loadingBox.classList.remove('loaded')
+    }
+  }
+
+  preloader.initLoading()
+
+  if (document.readyState === 'complete') {
+    preloader.endLoading()
+  } else {
+    window.addEventListener('load', preloader.endLoading)
+    document.addEventListener('DOMContentLoaded', preloader.endLoading)
+    // Add timeout protection: force end after 7 seconds
+    setTimeout(preloader.endLoading, 7000)
+  }
+
+  if (false) {
+    btf.addGlobalFn('pjaxSend', preloader.initLoading, 'preloader_init')
+    btf.addGlobalFn('pjaxComplete', preloader.endLoading, 'preloader_end')
+  }
+})()</script><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/images/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">101</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">6</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">17</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-list"></i><span> 清单</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/static/operations/"><i class="fa-fw iconfont icon-shoushudao1"></i><span> 技能考试</span></a></li><li><a class="site-page child" href="/static/radiations/"><i class="fa-fw iconfont icon-radiation"></i><span> 放射防护考试</span></a></li><li><a class="site-page child" href="/static/model/"><i class="fa-fw iconfont icon-jiandanmoxing"></i><span> 小鼠模型</span></a></li><li><a class="site-page child" href="/static/timetable"><i class="fa-fw iconfont icon--timetable"></i><span> 课表</span></a></li><li><a class="site-page child" href="/static/workingcard"><i class="fa-fw iconfont icon-bangdingyuangongka"></i><span> 员工卡</span></a></li><li><a class="site-page child" href="/static/radar"><i class="fa-fw iconfont icon-radarchart"></i><span> 雷达图</span></a></li><li><a class="site-page child" href="/static/audiogram"><i class="fa-fw iconfont icon-hearing"></i><span> 电测听</span></a></li><li><a class="site-page child" href="/static/medreconstruct"><i class="fa-fw iconfont icon-115"></i><span> 图像重建</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/static/cv"><i class="fa-fw fas fa-heart"></i><span> 关于我</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(/images/tardis.png);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">TeaPort</span></a><a class="nav-page-title" href="/"><span class="site-name">Transport and Application Layers</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首页</span></span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-list"></i><span> 清单</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/static/operations/"><i class="fa-fw iconfont icon-shoushudao1"></i><span> 技能考试</span></a></li><li><a class="site-page child" href="/static/radiations/"><i class="fa-fw iconfont icon-radiation"></i><span> 放射防护考试</span></a></li><li><a class="site-page child" href="/static/model/"><i class="fa-fw iconfont icon-jiandanmoxing"></i><span> 小鼠模型</span></a></li><li><a class="site-page child" href="/static/timetable"><i class="fa-fw iconfont icon--timetable"></i><span> 课表</span></a></li><li><a class="site-page child" href="/static/workingcard"><i class="fa-fw iconfont icon-bangdingyuangongka"></i><span> 员工卡</span></a></li><li><a class="site-page child" href="/static/radar"><i class="fa-fw iconfont icon-radarchart"></i><span> 雷达图</span></a></li><li><a class="site-page child" href="/static/audiogram"><i class="fa-fw iconfont icon-hearing"></i><span> 电测听</span></a></li><li><a class="site-page child" href="/static/medreconstruct"><i class="fa-fw iconfont icon-115"></i><span> 图像重建</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/static/cv"><i class="fa-fw fas fa-heart"></i><span> 关于我</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">Transport and Application Layers</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2019-06-05T01:08:36.000Z" title="发表于 2019-06-05 01:08:36">2019-06-05</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-11-27T12:11:30.945Z" title="更新于 2025-11-27 12:11:30">2025-11-27</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Network/">Network</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><blockquote>
+<p>Google crash course</p>
+</blockquote>
+<h1>Transport and Application Layers</h1>
+<h2 id="Intro">Intro</h2>
+<p><strong>Transport layer</strong>: Allows traffic to be directed to specific network applications.</p>
+<p><strong>Application layer</strong>: Allows these applications to communicate in a way they understand.</p>
+<h2 id="The-Transport-Layer">The Transport Layer</h2>
+<h4 id="Multiplex-and-Demultiplex">Multiplex and Demultiplex</h4>
+<table>
+<thead>
+<tr>
+<th>Processes</th>
+<th>Multiplexer</th>
+<th>IP</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>IP</td>
+<td>Demultiplexer</td>
+<td>Processes</td>
+</tr>
+</tbody>
+</table>
+<p>The transport layer handles this multiplexing and demultiplexing through <strong>Ports</strong>.</p>
+<p><strong>Port</strong>: A 16-bit number used to direct traffic to specific services running on a networked computer.</p>
+<p>Different network services run while listening on specific ports for incoming requests.</p>
+<p><em>Eg: HTTP(Hypertext Transfer Protocol, unencrypted):80<br>
+FTP(File Transfer Protocol): 21</em></p>
+<p><strong>Socket Address</strong>: Aka <strong>Socket number</strong> 10.1.1.100:8010.1.1.100:80</p>
+<h3 id="Dissection-of-a-TCP-Segment">Dissection of a TCP Segment</h3>
+<p><strong>TCP segment</strong>: Made up of a TCP header and a data section (payload layer).</p>
+<table>
+<thead>
+<tr>
+<th>Bit0~Bit15</th>
+<th>Bit15~Bit31</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Source port(16)</td>
+<td>Destination port(16)</td>
+</tr>
+<tr>
+<td>Sequence number(32)</td>
+<td>Sequence number(32)</td>
+</tr>
+<tr>
+<td>Acknowledgment number(32)</td>
+<td>Acknowledgment number(32)</td>
+</tr>
+<tr>
+<td>Header Length(4) empty(6) Control flags(6)</td>
+<td>Window(16)</td>
+</tr>
+<tr>
+<td>Checksum(16)</td>
+<td>Urgent(16)</td>
+</tr>
+<tr>
+<td>Options (0 or 16 if any)</td>
+<td>Padding</td>
+</tr>
+<tr>
+<td>Data payload (varies)</td>
+<td>…</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Source port</strong>: A high-numbered port chosen from a special section of ports known as <strong>ephemeral ports</strong>.</p>
+<p><strong>Sequence number</strong>: A 32-bit number used to keep track of where in a sequence of TCP segments this one is expected to be.</p>
+<p><strong>Acknowledgement number</strong>: The number of the next expected segment. <em>Eg: Sequence number 1 acknowledge number 2</em></p>
+<p><strong>Data offset field</strong>: 4-bit communicates how long the TCP header for this segment is. The receiving device can understand where the actual data payload begins.</p>
+<p><strong>Control flags</strong></p>
+<p><strong>TCP window</strong>: Specifies the range of sequence numbers that might be sent before an acknowledgement is required.</p>
+<p><strong>Urgent pointer field</strong>: Used in conjunction with one of the TCP control flags to point out particular segments that might be more important than others. Not common in modern networking.</p>
+<p><strong>Options</strong>: Also rare in the real world. Sometimes used for more complicated flow control protocols.</p>
+<h3 id="TCP-Control-Flags-and-the-Three-Way-Handshake">TCP Control Flags and the Three-Way Handshake</h3>
+<p>The way TCP establishes a connection is through the use of different TCP Control Flags used in very specific order.</p>
+<h4 id="Control-flags">Control flags</h4>
+<ul>
+<li>URG(urgent)
+<ul>
+<li>A value of one here indicates that the segment is considered urgent and that the urgent pointer field has more data about this.</li>
+</ul>
+</li>
+<li>ACK(acknowledged)
+<ul>
+<li>A value of one in this field means that the acknowledgement number field should be examined.</li>
+</ul>
+</li>
+<li>PSH(push)
+<ul>
+<li>The transmitting device wants the receiving device to push currently-buffered data to the application on the receiving end as soon as possible.</li>
+<li><strong>buffer</strong> is somewhere the data stored before it is sent.</li>
+</ul>
+</li>
+<li>RST(reset)
+<ul>
+<li>One of the sides in a TCP connection has not been able to properly recover from a series of missing or malformed segments.</li>
+</ul>
+</li>
+<li>SYN(synchronize)
+<ul>
+<li>It is used when first establishing a TCP connection and makes sure the receiving end knows to examine the sequence number field.</li>
+</ul>
+</li>
+<li>FIN(finish)
+<ul>
+<li>When this flag is set to one, it means the transmitting computer doesn’t have any more data to send and the connection can be closed.</li>
+</ul>
+</li>
+</ul>
+<p><strong>A typical connecting process should be like this</strong>:</p>
+<ol>
+<li>A———SYN——&gt;B</li>
+<li>A&lt;—-SYN/ACK—-B</li>
+<li>A———ACK——&gt;B</li>
+</ol>
+<p>This process is also called <strong>A Three-Way Handshake</strong></p>
+<p><strong>Handshake</strong>: A way for 2 devices to ensure that they are apeaking the same protocol and will be able to understand each other.</p>
+<p>This process is operated in <strong>Full Duplex</strong>. Each segment sent in either direction should be responded by a TCP segment with the ACK. This way, the other side always knows what has been received.</p>
+<p>When the connection is going to be closed, there will be the <strong>Four-Way Handshake</strong>:</p>
+<ol>
+<li>A&lt;——FIN——B</li>
+<li>A——-ACK—-&gt;B</li>
+<li>A——-FIN—-&gt;B</li>
+<li>A&lt;——ACK——B</li>
+</ol>
+<h3 id="TCP-Socket-States">TCP Socket States</h3>
+<p><strong>Socket</strong>: The <strong>instantiation</strong> of an end-point in a potential TCP connection.</p>
+<p><strong>Instantiation</strong>: The actual implementation of something defined elsewhere.</p>
+<p>TCP Sockets require extra programs to instantiate them. <strong>Ports</strong> are more virtual descriptive. You can send info to any port you want, but you are only going to get a response if a program has opened a socket on that port.</p>
+<h4 id="TCP-Socket-States-2">TCP Socket States</h4>
+<p><strong>LISTEN</strong>: A TCP socket is ready and listening for incoming connections. (Server side only)</p>
+<p><strong>SYN_SENT</strong>: A synchronization request has been sent, but the connection hasn’t been established yet. (Client side only)</p>
+<p><strong>SYN-RECEIVED</strong>: A socket previously in a LISTEN state has received a synchronization request and sent a SYN/ACK back. But it has not received the final ACK from client yet. (Server side only)</p>
+<p><strong>ESTABLISHED</strong>: The TCP connection is in working order and both sides are free to send each other data.</p>
+<p><strong>FIN_WAIT</strong>: A FIN has been sent, but the corresponding ACK from the other end has not been recieved yet.</p>
+<p><strong>CLOSE_WAIT</strong>: The connection has been closed at the TCP layer, but that the application that opened the socket has not released its hold on the socket yet.</p>
+<p><strong>CLOSED</strong>: The connection has been fully terminated and that no further communication is possible.</p>
+<p>These TCP socket states can vary from operating system to OS. TCP is universal, but choosing different states to describe the states is not as universal.</p>
+<h3 id="Connection-Oriented-and-Connectionless-Protocols">Connection-Oriented and Connectionless Protocols</h3>
+<p><strong>Connection-oriented protocol</strong>: Establishes a connection, and uses this to ensure that all data has been properly transmitted.</p>
+<p>When the data transmitting fails, resending will be determined on the <strong>Transport Level</strong> by <strong>TCP</strong> (to determine when to resend it), since TCP expect an ACK! Thus, sequence numbers is especially important!</p>
+<p><strong>Connectionless protocols</strong>: The most common one is called <strong>UDP(User Datagram Protocol)</strong>.</p>
+<p>UDP doesn’t rely on connections and doesn’t support ACK. Just set a destination port and send the packet. <em>Eg: streaming video</em>.</p>
+<h3 id="Firewalls">Firewalls</h3>
+<p>A device that blocks traffic that meets certain criteria. They are most frequently used in the transport layer. Block and allow ports.</p>
+<h2 id="The-Application-layer">The Application layer</h2>
+<h3 id="The-Application-Layer-and-the-OSI-Model">The Application Layer and the OSI Model</h3>
+<p><strong>OSI(Open System Interconnection)</strong>: 7 layers, adding <strong>Session</strong> and <strong>Presentation</strong> between <strong>Transport</strong> and <strong>Application</strong>.</p>
+<p><strong>Session Layer</strong>: Facilitating the communication between actual <strong>applications</strong> and the <strong>transport layer</strong>. Takes <strong>application layer</strong> data and hands it off to the <strong>presentation layer</strong>.</p>
+<p><strong>Presentation Layer</strong>: Responsible for making sure that the unencapsulated <strong>application layer</strong> data is able to be understood by the application in question. An OS might handle encryption or compression data.</p>
+<h3 id="All-the-layers-working-in-Unison">All the layers working in Unison!!!</h3>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://tctco.github.io">Cheng</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://tctco.github.io/2019/06/05/Transport-and-Application-Layers/">https://tctco.github.io/2019/06/05/Transport-and-Application-Layers/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="https://tctco.github.io" target="_blank">TeaPort</a>！</span></div></div><div class="tag_share"><div class="post-share"><div class="social-share" data-image="/images/tardis.png" data-sites="facebook,x,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2019/06/06/Networking-Services/" title="Networking Services"><img class="cover" src="/images/ink.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">Networking Services</div></div><div class="info-2"><div class="info-item-1"> Google crash course  Networking Service Name Resolution DNS(Domain Name System): A global and highly distributed network service that resolves strings of letters into IP addresses for you. Domain Name: The term we use for something that can be resolved by DNS. Eg: Domian Name: www.weather.com IP address: 186.192.1.1 If the company wants to shift their original data center to another place, by using DNS, it can change what IP the domain resolves to and users will not know. DNS is of global st...</div></div></div></a><a class="pagination-related" href="/2019/06/04/The-Network-Layer/" title="The Network Layer"><img class="cover" src="/images/dopamine.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">The Network Layer</div></div><div class="info-2"><div class="info-item-1">This is going to be a completely new part of my study in CS. This part won’t last long because I haven’t finished DataStructure and I’m going to learn assembly language. I learn this simply because my server was banned by the GFW and I need some extra knowledge to prevent this from happening again. Good Luck!  Google Crash Course  The Network Layer Describing the IP addressing scheme and subnetingworks. The Network Layer MAC addresses are useful in a small scale. But they are not ordered. Add...</div></div></div></a></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/images/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">Cheng</div><div class="author-info-description">Tech nerd, Amateur programmar, Medical Student</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">101</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">6</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">17</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/tctco"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="tencent://AddContact/?fromId=45&amp;fromSubId=1&amp;subcmd=all&amp;uin=859267560&amp;website=www.oicqzone.com" target="_blank" title=""><i class="fab fa-qq"></i></a><a class="social-icon" href="https://github.com/tctco" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:tctco2018@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">Transport and Application Layers</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Intro"><span class="toc-number">1.1.</span> <span class="toc-text">Intro</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#The-Transport-Layer"><span class="toc-number">1.2.</span> <span class="toc-text">The Transport Layer</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Multiplex-and-Demultiplex"><span class="toc-number">1.2.0.1.</span> <span class="toc-text">Multiplex and Demultiplex</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Dissection-of-a-TCP-Segment"><span class="toc-number">1.2.1.</span> <span class="toc-text">Dissection of a TCP Segment</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#TCP-Control-Flags-and-the-Three-Way-Handshake"><span class="toc-number">1.2.2.</span> <span class="toc-text">TCP Control Flags and the Three-Way Handshake</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Control-flags"><span class="toc-number">1.2.2.1.</span> <span class="toc-text">Control flags</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#TCP-Socket-States"><span class="toc-number">1.2.3.</span> <span class="toc-text">TCP Socket States</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#TCP-Socket-States-2"><span class="toc-number">1.2.3.1.</span> <span class="toc-text">TCP Socket States</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Connection-Oriented-and-Connectionless-Protocols"><span class="toc-number">1.2.4.</span> <span class="toc-text">Connection-Oriented and Connectionless Protocols</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Firewalls"><span class="toc-number">1.2.5.</span> <span class="toc-text">Firewalls</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#The-Application-layer"><span class="toc-number">1.3.</span> <span class="toc-text">The Application layer</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#The-Application-Layer-and-the-OSI-Model"><span class="toc-number">1.3.1.</span> <span class="toc-text">The Application Layer and the OSI Model</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#All-the-layers-working-in-Unison"><span class="toc-number">1.3.2.</span> <span class="toc-text">All the layers working in Unison!!!</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2025/11/11/%E6%9C%89%E5%85%B3%E8%AE%BE%E8%AE%A1%E5%8C%BB%E5%AD%A6%E6%9C%8D%E5%8A%A1%E4%B8%AD%E5%8F%B0%E7%9A%84%E6%80%9D%E8%80%83/" title="有关设计医学服务中台的思考"><img src="/images/CMYK.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="有关设计医学服务中台的思考"/></a><div class="content"><a class="title" href="/2025/11/11/%E6%9C%89%E5%85%B3%E8%AE%BE%E8%AE%A1%E5%8C%BB%E5%AD%A6%E6%9C%8D%E5%8A%A1%E4%B8%AD%E5%8F%B0%E7%9A%84%E6%80%9D%E8%80%83/" title="有关设计医学服务中台的思考">有关设计医学服务中台的思考</a><time datetime="2025-11-11T19:39:42.000Z" title="发表于 2025-11-11 19:39:42">2025-11-11</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/10/31/js%E4%B8%8Ets/" title="js与ts"><img src="/images/rocket.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="js与ts"/></a><div class="content"><a class="title" href="/2025/10/31/js%E4%B8%8Ets/" title="js与ts">js与ts</a><time datetime="2025-10-31T19:48:12.000Z" title="发表于 2025-10-31 19:48:12">2025-10-31</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/05/22/orthanc/" title="orthanc"><img src="/images/dopamine.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="orthanc"/></a><div class="content"><a class="title" href="/2025/05/22/orthanc/" title="orthanc">orthanc</a><time datetime="2025-05-22T15:49:42.000Z" title="发表于 2025-05-22 15:49:42">2025-05-22</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/04/25/%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%9B%B8%E5%85%B3/" title="虚拟机相关"><img src="/images/memory.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="虚拟机相关"/></a><div class="content"><a class="title" href="/2025/04/25/%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%9B%B8%E5%85%B3/" title="虚拟机相关">虚拟机相关</a><time datetime="2025-04-25T22:25:51.000Z" title="发表于 2025-04-25 22:25:51">2025-04-25</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/04/15/%E8%AE%B0%E5%BD%95%E4%B8%80%E4%B8%8B%E5%B8%B8%E7%94%A8Linux%E5%91%BD%E4%BB%A4%EF%BC%81/" title="记录一下常用Linux命令！"><img src="/images/mountain.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="记录一下常用Linux命令！"/></a><div class="content"><a class="title" href="/2025/04/15/%E8%AE%B0%E5%BD%95%E4%B8%80%E4%B8%8B%E5%B8%B8%E7%94%A8Linux%E5%91%BD%E4%BB%A4%EF%BC%81/" title="记录一下常用Linux命令！">记录一下常用Linux命令！</a><time datetime="2025-04-15T17:44:43.000Z" title="发表于 2025-04-15 17:44:43">2025-04-15</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2023 - 2025 By Cheng</span></div><div class="footer_custom_text">很高兴遇见你。</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.3-b2"></script><script src="/js/main.js?v=5.5.3-b2"></script><div class="js-pjax"></div><script defer="defer" id="fluttering_ribbon" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/dist/canvas-fluttering-ribbon.min.js"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/metingjs/dist/Meting.min.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

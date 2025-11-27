@@ -1,0 +1,304 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Interlude: Memory API | TeaPort</title><meta name="author" content="Cheng,tctco2018@gmail.com"><meta name="copyright" content="Cheng"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Interlude: Memory API CRUX: How to allocate and manage memory in UNIX&#x2F;C programs? Types of Memory stack memory: allocations and deallocations are managed implicitly by the compiler. For this reason it">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Interlude: Memory API">
+<meta property="og:url" content="https://tctco.github.io/2020/09/21/Interlude-Memory-API/index.html">
+<meta property="og:site_name" content="TeaPort">
+<meta property="og:description" content="Interlude: Memory API CRUX: How to allocate and manage memory in UNIX&#x2F;C programs? Types of Memory stack memory: allocations and deallocations are managed implicitly by the compiler. For this reason it">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://tctco.github.io/images/CMYK.png">
+<meta property="article:published_time" content="2020-09-21T02:10:21.000Z">
+<meta property="article:modified_time" content="2025-11-27T12:11:30.943Z">
+<meta property="article:author" content="Cheng">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://tctco.github.io/images/CMYK.png"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Interlude: Memory API",
+  "url": "https://tctco.github.io/2020/09/21/Interlude-Memory-API/",
+  "image": "https://tctco.github.io/images/CMYK.png",
+  "datePublished": "2020-09-21T02:10:21.000Z",
+  "dateModified": "2025-11-27T12:11:30.943Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Cheng",
+      "url": "https://tctco.github.io"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/images/favicon.png"><link rel="canonical" href="https://tctco.github.io/2020/09/21/Interlude-Memory-API/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.5.3-b2"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.12.0/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Interlude: Memory API',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><link rel="stylesheet" href="//at.alicdn.com/t/c/font_3878240_kz3gpk6zi4c.css"><link rel="stylesheet" href="/static/css/bilibili.css"><meta name="generator" content="Hexo 6.3.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><script>(()=>{
+  const $loadingBox = document.getElementById('loading-box')
+  const $body = document.body
+  const preloader = {
+    endLoading: () => {
+      if ($loadingBox.classList.contains('loaded')) return
+      $body.style.overflow = ''
+      $loadingBox.classList.add('loaded')
+    },
+    initLoading: () => {
+      $body.style.overflow = 'hidden'
+      $loadingBox.classList.remove('loaded')
+    }
+  }
+
+  preloader.initLoading()
+
+  if (document.readyState === 'complete') {
+    preloader.endLoading()
+  } else {
+    window.addEventListener('load', preloader.endLoading)
+    document.addEventListener('DOMContentLoaded', preloader.endLoading)
+    // Add timeout protection: force end after 7 seconds
+    setTimeout(preloader.endLoading, 7000)
+  }
+
+  if (false) {
+    btf.addGlobalFn('pjaxSend', preloader.initLoading, 'preloader_init')
+    btf.addGlobalFn('pjaxComplete', preloader.endLoading, 'preloader_end')
+  }
+})()</script><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/images/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">101</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">6</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">17</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-list"></i><span> 清单</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/static/operations/"><i class="fa-fw iconfont icon-shoushudao1"></i><span> 技能考试</span></a></li><li><a class="site-page child" href="/static/radiations/"><i class="fa-fw iconfont icon-radiation"></i><span> 放射防护考试</span></a></li><li><a class="site-page child" href="/static/model/"><i class="fa-fw iconfont icon-jiandanmoxing"></i><span> 小鼠模型</span></a></li><li><a class="site-page child" href="/static/timetable"><i class="fa-fw iconfont icon--timetable"></i><span> 课表</span></a></li><li><a class="site-page child" href="/static/workingcard"><i class="fa-fw iconfont icon-bangdingyuangongka"></i><span> 员工卡</span></a></li><li><a class="site-page child" href="/static/radar"><i class="fa-fw iconfont icon-radarchart"></i><span> 雷达图</span></a></li><li><a class="site-page child" href="/static/audiogram"><i class="fa-fw iconfont icon-hearing"></i><span> 电测听</span></a></li><li><a class="site-page child" href="/static/medreconstruct"><i class="fa-fw iconfont icon-115"></i><span> 图像重建</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/static/cv"><i class="fa-fw fas fa-heart"></i><span> 关于我</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(/images/CMYK.png);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">TeaPort</span></a><a class="nav-page-title" href="/"><span class="site-name">Interlude: Memory API</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首页</span></span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-list"></i><span> 清单</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/static/operations/"><i class="fa-fw iconfont icon-shoushudao1"></i><span> 技能考试</span></a></li><li><a class="site-page child" href="/static/radiations/"><i class="fa-fw iconfont icon-radiation"></i><span> 放射防护考试</span></a></li><li><a class="site-page child" href="/static/model/"><i class="fa-fw iconfont icon-jiandanmoxing"></i><span> 小鼠模型</span></a></li><li><a class="site-page child" href="/static/timetable"><i class="fa-fw iconfont icon--timetable"></i><span> 课表</span></a></li><li><a class="site-page child" href="/static/workingcard"><i class="fa-fw iconfont icon-bangdingyuangongka"></i><span> 员工卡</span></a></li><li><a class="site-page child" href="/static/radar"><i class="fa-fw iconfont icon-radarchart"></i><span> 雷达图</span></a></li><li><a class="site-page child" href="/static/audiogram"><i class="fa-fw iconfont icon-hearing"></i><span> 电测听</span></a></li><li><a class="site-page child" href="/static/medreconstruct"><i class="fa-fw iconfont icon-115"></i><span> 图像重建</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/static/cv"><i class="fa-fw fas fa-heart"></i><span> 关于我</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">Interlude: Memory API</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2020-09-21T02:10:21.000Z" title="发表于 2020-09-21 02:10:21">2020-09-21</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-11-27T12:11:30.943Z" title="更新于 2025-11-27 12:11:30">2025-11-27</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/OS/">OS</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h1>Interlude: Memory API</h1>
+<p>CRUX: How to allocate and manage memory in UNIX/C programs?</p>
+<h2 id="Types-of-Memory">Types of Memory</h2>
+<p><strong>stack memory</strong>: allocations and deallocations are managed implicitly by the compiler. For this reason it is sometimes called <strong>automatic</strong> memory.</p>
+<p>Declaring memory on the stack in C is easy. For example, let’s say you need some space in function <code>func()</code> for an integer, called <code>x</code>. To declare such a piece of memory, you just do something like this:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">func</span><span class="params">()</span> &#123;</span><br><span class="line">  <span class="type">int</span> x;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>The compiler does the rest, making sure to make space on the stack when you call into <code>func</code>. When you return form the function, the compiler deallocates the memory for you; thus, if you want some information to live beyond the call invocation, you had better not leave that information on the stack.</p>
+<p><strong>heap memory</strong>: all allocations and deallocations are explicitly handled.</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">func</span><span class="params">()</span> &#123;</span><br><span class="line">  <span class="type">int</span> *x = (<span class="type">int</span> *) <span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(<span class="type">int</span>));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Both stack and heap allocation occur on this line: first the compiler knows to make room for a pointer to an integer when it sees your declaration of said pointer (<code>int *x</code>); subsequently, when the program calls <code>malloc()</code>, it requests space for an integer on the heap; the routine returns the address of such an integer.</p>
+<h2 id="The-malloc-Call">The <code>malloc</code> Call</h2>
+<p>Form man page for <code>malloc</code>, all you need to do is include the header file <code>stdlib.h</code>. In fact, you don’t really need to even do this, as the C library, which all C programs link with by default, has the code for <code>malloc()</code> inside of it, adding the header just lets the compiler check whether you are calling <code>malloc</code> correctly.</p>
+<p>The invocation of <code>malloc</code> uses the <code>sizeof()</code> operator to request the right amount of space; in C, this is generally thought of as a compile-time operator, meaning that the the actual size is known at compile time and thus a number is substituted as the argument to <code>malloc()</code>. For this reason, <code>sizeof()</code> is correctly thought of as an operator and not a function call.</p>
+<p>You can also pass in the name of a variable.</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> *x = <span class="built_in">malloc</span>(<span class="number">10</span> * <span class="keyword">sizeof</span>(<span class="type">int</span>));</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, <span class="keyword">sizeof</span>(x)); <span class="comment">// 4 on 32-bit machines or 8 on 64-bit machines</span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> x[<span class="number">10</span>];</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, <span class="keyword">sizeof</span>(x)); <span class="comment">// 40 bytes</span></span><br></pre></td></tr></table></figure>
+<p>Another place to be careful is with strings. When declaring space for a string, use the following idiom: <code>malloc(strlen(s) + 1)</code>, which gets the length of the string using the function <code>strlen()</code>, and adds 1 to it in order to make room for the end-of-string character. Using <code>sizeof()</code> may lead to trouble here.</p>
+<p><code>malloc()</code> returns a pointer to type <code>void</code>. Doing so is just the way in C to pass back an address and let the programmer decide what to do with it. The programmer further helps out by using what is called a <strong>cast</strong>.</p>
+<h2 id="The-free-Call">The <code>free</code> Call</h2>
+<p>The size of the allocated region is not passed in by the user, and must be tracked by the memory-allocation library itself.</p>
+<h2 id="Common-Errors">Common Errors</h2>
+<p>There are a number of common errors that arise in the use of <code>malloc()</code> and <code>free()</code></p>
+<ul>
+<li>
+<p>Forgetting to allocate memory</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">char</span> *src = <span class="string">&quot;hello&quot;</span>;</span><br><span class="line"><span class="type">char</span> *dst;</span><br><span class="line"><span class="built_in">strcpy</span>(dst, src);</span><br></pre></td></tr></table></figure>
+<p><strong>segmentation fault</strong></p>
+<p>Alternatively, you could use <code>strdup()</code> and make your life even easier.</p>
+</li>
+<li>
+<p>Not allocating enough memory</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">char</span> *src = <span class="string">&quot;hello&quot;</span>;</span><br><span class="line"><span class="type">char</span> *dst = (<span class="type">char</span> *) <span class="built_in">malloc</span>(<span class="built_in">strlen</span>(src));</span><br><span class="line"><span class="built_in">strcpy</span>(dst, src);</span><br></pre></td></tr></table></figure>
+<p>In some cases, the malloc library allocated a little extra space anyhow, and thus your program actually doesn’t scribble on some other variable’s value and works quite fine. Even though it ran correctly once, doesn’t mean it’s correct!</p>
+</li>
+<li>
+<p>Forgetting to initialize allocated memory: your program will eventually encounter an <strong>uninitialized read</strong>, where it reads from the heap some data of unknown value.</p>
+</li>
+<li>
+<p>Forgetting to free memory: <strong>memory leak</strong></p>
+</li>
+<li>
+<p>Freeing memory before you are done with it: <strong>dangling pointer</strong></p>
+</li>
+<li>
+<p>Freeing memory repeatedly: <strong>double free</strong></p>
+</li>
+<li>
+<p>Calling <code>free()</code> incorrectly: <strong>invalid frees</strong> are dangerous.</p>
+</li>
+</ul>
+<h2 id="Useful-Debugging-Tools-for-Memory">Useful Debugging Tools for Memory</h2>
+<ul>
+<li><strong>purify</strong></li>
+<li><strong>valgrind</strong></li>
+</ul>
+<h2 id="Underlying-OS-Support">Underlying OS Support</h2>
+<p><code>malloc()</code> and <code>free()</code> are not system calls, but rather library calls. The malloc library manages space within your virtual address space, but itself is built on top of some system calls which call into the OS to ask for more memory or release some back to the system.</p>
+<p>One such system call is called <code>brk</code>, which is used to change the location of the program’s <strong>break</strong>: the location of the end of the heap. It takes one argument (the address of the new break), and thus either increases or decreases the size of the heap based on whether the new break is larger or smaller than the current break. An additional <code>sbrk</code> is passed an increment but otherwise serves a similar purpose.</p>
+<p>Note that you should never directly call either <code>brk</code> or <code>sbrk</code>!</p>
+<p>Finally, you can also obtain memory from the operating system via the <code>mmap()</code> call. By passing the correct arguments, <code>mmap()</code> can create an <strong>anonymous</strong> memory region within your program ---- a region which is not associated with any particular file but rather with <strong>swap space</strong>. This memory can then also be treated like a heap and managed as such.</p>
+<h2 id="Other-Calls">Other Calls</h2>
+<ul>
+<li><code>calloc()</code> allocates memory and also zeroes it before returning.</li>
+<li><code>realloc()</code> makes a new larger region of memory, copies the old region into it, and returns the pointer to the new region.</li>
+</ul>
+<h2 id="Homework">Homework</h2>
+<ol>
+<li>First, write a simple program called <code>null.c</code> that creates a pointer to an integer, sets it to <code>NULL</code>, and then tries to dereference it. Compile this into an executable called <code>null</code>. What happens when you run this program?
+<ul>
+<li>segmentation fault</li>
+</ul>
+</li>
+<li>Next, compile this program with symbol information included (with the <code>-g</code> flag). Doing so let’s put more information into the executable, enabling the debugger to access more useful information about variable names and the like. Run the program under the debugger by typing <code>gdb</code> null and then, once <code>gdb</code> is running, typing run. What does <code>gdb</code> show you?
+<ul>
+<li>Program received signal SIGSEGV, Segmentation fault.<br>
+0x0000555555554655 in main (argc=1, argv=0x7fffffffea78) at null.c:9<br>
+9         int x = *p;</li>
+</ul>
+</li>
+<li>Finally, use the <code>valgrind</code> tool on this program. We’ll use the <code>memcheck</code> tool that is a part of <code>valgrind</code> to analyze what happens. Run this by typing in the following: <code>valgrind --leak-check=yes null</code>. What happens when you run this? Can you interpret the output from the tool?
+<ul>
+<li>Invalid read of size 4. Address 0x0 is not stack’d, malloc’d or (recently) free’d.</li>
+</ul>
+</li>
+<li>Write a simple program that allocates memory using malloc() but forgets to free it before exiting. What happens when this program runs? Can you use <code>gdb</code> to find any problems with it? How about <code>valgrind</code> (again with the --leak-check=yes flag)?
+<ul>
+<li><code>gdb</code>: exited normally.</li>
+<li><code>valgrind</code>: HEAP SUMMAYR: in use at exit: 4 bytes in 1 blocks. LEAK SUMMARY: definitely lost: 4 bytes in 1 blocks.</li>
+</ul>
+</li>
+<li>Write a program that creates an array of integers called <code>data</code> of size 100 using <code>malloc</code>; then, set <code>data[100]</code> to zero. What happens when you run this program? What happens when you run this program using <code>valgrind</code>? Is the program correct?
+<ul>
+<li><code>gdb</code>: exited normally.</li>
+<li><code>valgrind</code>: LEAK SUMMARY: definitely lost: 400 bytes in 1 blocks.</li>
+</ul>
+</li>
+<li>Create a program that allocates an array of integers (as above), frees them, and then tries to print the value of one of the elements of the array. Does the program run? What happens when you use <code>valgrind</code> on it?
+<ul>
+<li><code>gdb</code>: exited normally.</li>
+<li><code>valgrind</code>: Invalid read of size 4 at 0xBLABLABLA</li>
+</ul>
+</li>
+<li>Now pass a funny value to free (e.g., a pointer in the middle of the array you allocated above). What happens? Do you need tools to find this type of problem?
+<ul>
+<li>Invalid pointer: the program won’t exit normally.</li>
+</ul>
+</li>
+<li>Try out some of the other interfaces to memory allocation. For example, create a simple vector-like data structure and related routines that use <code>realloc()</code> to manage the vector. Use an array to store the vectors elements; when a user adds an entry to the vector, use <code>realloc()</code> to allocate more space for it. How well does such a vector perform? How does it compare to a linked list? Use <code>valgrind</code> to help you find bugs.
+<ul>
+<li>Much slower: need reallocation every time a new element is added.</li>
+</ul>
+</li>
+<li>Spend more time and read about using <code>gdb</code> and <code>valgrind</code>. Knowing your tools is critical; spend the time and learn how to become an expert debugger in the UNIX and C environment.</li>
+</ol>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://tctco.github.io">Cheng</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://tctco.github.io/2020/09/21/Interlude-Memory-API/">https://tctco.github.io/2020/09/21/Interlude-Memory-API/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="https://tctco.github.io" target="_blank">TeaPort</a>！</span></div></div><div class="tag_share"><div class="post-share"><div class="social-share" data-image="/images/CMYK.png" data-sites="facebook,x,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2020/10/01/Mechanism-Address-Translation/" title="Mechanism: Address Translation"><img class="cover" src="/images/dopamine.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">Mechanism: Address Translation</div></div><div class="info-2"><div class="info-item-1">Mechanism: Address Translation CPU: limited direct execution (LDE) In virtualizing memory, we will pursue efficiency and control. CRUX: How to efficiently and flexibly virtualize memory? Technique: hardware-based address translation / address translation, changing the virtual address provided by the instruction to a physical address. Interposition is powerful: On of the usual benefits of such an approach is transparency. Dynamic (Hardware-based) Relocation base and bounds / dynamic relocation...</div></div></div></a><a class="pagination-related" href="/2020/09/11/The-Abstraction-Address-Spaces/" title="The Abstraction: Address Spaces"><img class="cover" src="/images/tardis.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">The Abstraction: Address Spaces</div></div><div class="info-2"><div class="info-item-1">The Abstraction: Address Spaces Early Systems From the perspective of memory, early machine didn’t provide much of an abstraction to users. The OS was a set of routines (a library, really) that sat in memory (starting at physical address 0, for example), and there would be one running program (a process) that currently sat in physical memory and used the rest of memory. Multiprogramming and Time Sharing multiprogramming: multiple processes were ready to run at a given time, and the OS would s...</div></div></div></a></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/images/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">Cheng</div><div class="author-info-description">Tech nerd, Amateur programmar, Medical Student</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">101</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">6</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">17</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/tctco"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="tencent://AddContact/?fromId=45&amp;fromSubId=1&amp;subcmd=all&amp;uin=859267560&amp;website=www.oicqzone.com" target="_blank" title=""><i class="fab fa-qq"></i></a><a class="social-icon" href="https://github.com/tctco" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:tctco2018@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">Interlude: Memory API</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Types-of-Memory"><span class="toc-number">1.1.</span> <span class="toc-text">Types of Memory</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#The-malloc-Call"><span class="toc-number">1.2.</span> <span class="toc-text">The malloc Call</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#The-free-Call"><span class="toc-number">1.3.</span> <span class="toc-text">The free Call</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Common-Errors"><span class="toc-number">1.4.</span> <span class="toc-text">Common Errors</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Useful-Debugging-Tools-for-Memory"><span class="toc-number">1.5.</span> <span class="toc-text">Useful Debugging Tools for Memory</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Underlying-OS-Support"><span class="toc-number">1.6.</span> <span class="toc-text">Underlying OS Support</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Other-Calls"><span class="toc-number">1.7.</span> <span class="toc-text">Other Calls</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Homework"><span class="toc-number">1.8.</span> <span class="toc-text">Homework</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2025/11/11/%E6%9C%89%E5%85%B3%E8%AE%BE%E8%AE%A1%E5%8C%BB%E5%AD%A6%E6%9C%8D%E5%8A%A1%E4%B8%AD%E5%8F%B0%E7%9A%84%E6%80%9D%E8%80%83/" title="有关设计医学服务中台的思考"><img src="/images/CMYK.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="有关设计医学服务中台的思考"/></a><div class="content"><a class="title" href="/2025/11/11/%E6%9C%89%E5%85%B3%E8%AE%BE%E8%AE%A1%E5%8C%BB%E5%AD%A6%E6%9C%8D%E5%8A%A1%E4%B8%AD%E5%8F%B0%E7%9A%84%E6%80%9D%E8%80%83/" title="有关设计医学服务中台的思考">有关设计医学服务中台的思考</a><time datetime="2025-11-11T19:39:42.000Z" title="发表于 2025-11-11 19:39:42">2025-11-11</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/10/31/js%E4%B8%8Ets/" title="js与ts"><img src="/images/rocket.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="js与ts"/></a><div class="content"><a class="title" href="/2025/10/31/js%E4%B8%8Ets/" title="js与ts">js与ts</a><time datetime="2025-10-31T19:48:12.000Z" title="发表于 2025-10-31 19:48:12">2025-10-31</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/05/22/orthanc/" title="orthanc"><img src="/images/dopamine.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="orthanc"/></a><div class="content"><a class="title" href="/2025/05/22/orthanc/" title="orthanc">orthanc</a><time datetime="2025-05-22T15:49:42.000Z" title="发表于 2025-05-22 15:49:42">2025-05-22</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/04/25/%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%9B%B8%E5%85%B3/" title="虚拟机相关"><img src="/images/memory.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="虚拟机相关"/></a><div class="content"><a class="title" href="/2025/04/25/%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%9B%B8%E5%85%B3/" title="虚拟机相关">虚拟机相关</a><time datetime="2025-04-25T22:25:51.000Z" title="发表于 2025-04-25 22:25:51">2025-04-25</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/04/15/%E8%AE%B0%E5%BD%95%E4%B8%80%E4%B8%8B%E5%B8%B8%E7%94%A8Linux%E5%91%BD%E4%BB%A4%EF%BC%81/" title="记录一下常用Linux命令！"><img src="/images/mountain.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="记录一下常用Linux命令！"/></a><div class="content"><a class="title" href="/2025/04/15/%E8%AE%B0%E5%BD%95%E4%B8%80%E4%B8%8B%E5%B8%B8%E7%94%A8Linux%E5%91%BD%E4%BB%A4%EF%BC%81/" title="记录一下常用Linux命令！">记录一下常用Linux命令！</a><time datetime="2025-04-15T17:44:43.000Z" title="发表于 2025-04-15 17:44:43">2025-04-15</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2023 - 2025 By Cheng</span></div><div class="footer_custom_text">很高兴遇见你。</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.3-b2"></script><script src="/js/main.js?v=5.5.3-b2"></script><div class="js-pjax"></div><script defer="defer" id="fluttering_ribbon" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/dist/canvas-fluttering-ribbon.min.js"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/metingjs/dist/Meting.min.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
