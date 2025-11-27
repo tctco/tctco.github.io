@@ -4,6 +4,19 @@
   
     
     <entry>
+      <title>解决：ChatGPT提示所在的地区或国家不支持</title>
+      <link href="/2025/11/27/%E8%A7%A3%E5%86%B3%EF%BC%9AChatGPT%E6%8F%90%E7%A4%BA%E6%89%80%E5%9C%A8%E7%9A%84%E5%9C%B0%E5%8C%BA%E6%88%96%E5%9B%BD%E5%AE%B6%E4%B8%8D%E6%94%AF%E6%8C%81/"/>
+      <url>/2025/11/27/%E8%A7%A3%E5%86%B3%EF%BC%9AChatGPT%E6%8F%90%E7%A4%BA%E6%89%80%E5%9C%A8%E7%9A%84%E5%9C%B0%E5%8C%BA%E6%88%96%E5%9B%BD%E5%AE%B6%E4%B8%8D%E6%94%AF%E6%8C%81/</url>
+      
+        <content type="html"><![CDATA[<p>ChatGPT浏览器访问无代理，被识别为国内IP：可以考虑禁用QUIC（HTTP/3）</p><ol><li>浏览器打开 <code>edge://flags/</code></li><li>搜索 <code>QUIC</code></li><li>关闭此选项</li></ol><p>参考文献：</p><ol><li><a href="https://www.cnblogs.com/sidianok/p/17577262.html">QUIC简介</a></li><li><a href="https://blog.csdn.net/popuui123/article/details/135550077">原答案</a></li></ol>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>有关设计医学服务中台的思考</title>
       <link href="/2025/11/11/%E6%9C%89%E5%85%B3%E8%AE%BE%E8%AE%A1%E5%8C%BB%E5%AD%A6%E6%9C%8D%E5%8A%A1%E4%B8%AD%E5%8F%B0%E7%9A%84%E6%80%9D%E8%80%83/"/>
       <url>/2025/11/11/%E6%9C%89%E5%85%B3%E8%AE%BE%E8%AE%A1%E5%8C%BB%E5%AD%A6%E6%9C%8D%E5%8A%A1%E4%B8%AD%E5%8F%B0%E7%9A%84%E6%80%9D%E8%80%83/</url>
