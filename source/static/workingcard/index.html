@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    @media print {
+      .pagebreak {
+        page-break-before: always;
+      }
+
+      .no-print,
+      .no-print * {
+        display: none !important;
+      }
+    }
+
+    body {
+      font-family: 'Times New Roman', SimSun;
+      margin: 0;
+      /* zoom:120%; */
+    }
+
+    .bg {
+      /* margin: 1mm; */
+      margin: .5mm;
+      background-image: url(./bg.jpg);
+      background-position: center center;
+      background-color: white;
+      /* height: 85.5mm;
+      width: 54mm;  */
+      height: 10.4cm;
+      width: 7cm;
+      background-size: cover;
+      text-align: center;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .profile {
+      width: 2.5cm;
+      height: 3.5cm;
+      /* margin-top: -2mm; */
+      margin-top: 2mm;
+      object-position: center;
+      object-fit: cover;
+      margin-bottom: .5cm;
+    }
+
+    .info {
+      /* font-size: .9em; */
+      font-size: 1.1em;
+      margin: 0.1cm;
+      font-weight: 650;
+    }
+
+    label {
+      display: block;
+    }
+
+    .title {
+      /* font-size: 1.5em; */
+      font-size: 2em;
+      /* font-weight: 650; */
+      font-weight: 700;
+      margin-bottom: 3mm;
+      /* margin-top: 1.4cm; */
+      margin-top: 1.7cm;
+    }
+
+    .footer,
+    .ffooter {
+      font-size: .6em;
+      /* margin-top: 7mm; */
+      margin-top: 7mm;
+      font-weight: 500;
+    }
+
+    .name,
+    .job {
+      border-bottom: 1.5px solid black;
+      min-width: 1.4cm;
+      display: inline-block;
+      padding-left: 3mm;
+      padding-right: 3mm;
+      text-align: justify;
+      text-align-last: justify;
+      font-family: KaiTi;
+    }
+  </style>
+</head>
+
+<body>
+  <div style="width: 100%; text-align:center;">
+    <div class="bg bgfront" id="0">
+      <div style="width: 100%;height: 100%;" class="container">
+        <p class="title" style="opacity: 0;">工 作 证</p>
+        <!-- <p style="font-size: .8em; margin-top: -1mm;">Working Card</p> -->
+        <img src="./cat.webp" class="profile" style="margin-top: -3mm;">
+        <!-- <div class="info">部门：<div class="job">
+            学术部</div>
+        </div> -->
+        <div class="info" style="margin-top: -2mm; font-size: 1.3em;">
+          <div class="name"
+            style="border-bottom: none; color: #295a7a; font-family: 'Microsoft YaHei'; font-weight: 600;">
+            猫猫</div>
+        </div>
+        <p class="footer" style="font-size: 1em; margin-top: 0mm; font-family: 'Microsoft YaHei';">2017级临床医学八年制
+        </p>
+        <p class="ffooter" style="font-size: 1em; margin-top: -4mm; font-family: 'Microsoft YaHei';">团支部</p>
+      </div>
+    </div>
+    <div class="pagebreak" style="direction: rtl;">
+      <!-- <div class="bg bgback"
+        style="background-image: url(./logo.jpg); background-size: contain; background-repeat: no-repeat;"> -->
+      <div class="bg bgback">
+        <div
+          style="z-index: 9999; width: 100%;height: 100%; display:flex; justify-content: center; align-items: center;"
+          class="container">
+          <div style="display:flex; justify-content: center;">
+            <!-- <img src="./logo-removebg-preview.png" style="mix-blend-mode: multiply; width: 3cm;"> -->
+            <!-- <p style="font-size: 2em; font-weight: 600; writing-mode: vertical-lr; margin-right: 0;">
+            工作人员</p>
+          <p style="font-size: 1em; font-weight: 500; writing-mode: vertical-lr; margin-left: 0;">
+            WORKING CARD</p> -->
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <div>
+    </div>
+    <div class="no-print">
+      <label>前面的背景图
+        <input type="file" accept="image/*" id="bgfront-input">
+      </label>
+      <label>后面的背景图
+        <input type="file" accept="image/*" id="bgback-input">
+      </label>
+      <label>一寸证件照（命名格式："部门 姓名.扩展名"）
+        <input type="file" accept="image/*" id="profile-input" multiple>
+      </label>
+      <label>部门
+        <input type="text" id="job-input">
+      </label>
+      <label>姓名
+        <input type="text" id="name-input">
+      </label>
+      <label>脚标<input type="text" id="footer-input"></label>
+      <label>开启背景模糊<input type="checkbox" id="blur-input"></label>
+      请按ctrl+p打印，在弹出对话框中找到“更多设置”中，并勾选“背景图形”。否则背景图不能打印。
+    </div>
+    <script>
+      const bgFrontInput = document.getElementById('bgfront-input');
+      const bgBackInput = document.getElementById('bgback-input');
+      const profileInput = document.getElementById('profile-input');
+      const nameInput = document.getElementById('name-input');
+      const jobInput = document.getElementById('job-input');
+      const footerInput = document.getElementById('footer-input');
+      const blurInput = document.getElementById('blur-input');
+
+      function changeBg(selector) {
+        return (e) => {
+          let elems = document.getElementsByClassName(selector)
+          for (let i = 0; i < elems.length; i++) {
+            let fr = new FileReader();
+            fr.onload = function () {
+              elems[i].style.backgroundImage = `url(${fr.result})`;
+            }
+            fr.readAsDataURL(e.target.files[0])
+          }
+        }
+      }
+      bgFrontInput.addEventListener('change', changeBg('bgfront'));
+      bgBackInput.addEventListener('change', changeBg('bgback'));
+      profileInput.addEventListener('change', (e) => {
+        let len = e.target.files.length;
+        for (let i = 0; i < len - 1; i++) {
+          const elem = document.getElementById(`${i}`);
+          let clone = elem.cloneNode(true);
+          clone.id = i + 1
+          elem.after(clone);
+          const elem2 = document.querySelector(`.bgback`);
+          let clone2 = elem2.cloneNode(true);
+          elem2.after(clone2)
+          // console.log(clone2.className)
+        }
+        for (let i = 4; i < len; i += 4) {
+          const elem = document.getElementById(`${i}`);
+          elem.className += ' pagebreak'
+          // clone2.className += ' pagebreak'
+        }
+        let profiles = document.getElementsByClassName('profile')
+        let jobElements = document.getElementsByClassName('job');
+        let nameElements = document.getElementsByClassName('name');
+        let footerElements = document.getElementsByClassName('footer');
+        for (let i = 0; i < len; i++) {
+          let fr = new FileReader();
+          const [job, name] = e.target.files[i].name.split('.')[0].split(' ')
+          // jobElements[i].innerText = job;
+          footerElements[i].innerText = job;
+          nameElements[i].innerText = name;
+          fr.onload = () => profiles[i].src = fr.result;
+          fr.readAsDataURL(e.target.files[i])
+        }
+      })
+      nameInput.addEventListener('change', (e) => {
+        let names = e.target.value.split(' ');
+
+        let nameElements = document.getElementsByClassName('name');
+        for (let i = 0; i < Math.min(names.length, nameElements.length); i++) {
+          nameElements[i].innerText = names[i];
+        }
+      })
+      jobInput.addEventListener('change', (e) => {
+        let jobs = e.target.value.split(' ');
+        let jobElements = document.getElementsByClassName('job');
+        for (let i = 0; i < Math.min(jobs.length, jobElements.length); i++) {
+          jobElements[i].innerText = jobs[i];
+        }
+      })
+      footerInput.addEventListener('change', (e) => {
+        let footers = document.getElementsByClassName('footer')
+        for (let i = 0; i < footers.length; i++) footers[i].innerText = e.target.value;
+      })
+      blurInput.addEventListener('change', (e) => {
+        const checked = document.getElementById('blur-input').checked;
+        let containers = document.getElementsByClassName('container')
+        if (checked) {
+          for (let i = 0; i < containers.length; i++) {
+            containers[i].style.backdropFilter = 'blur(2px)';
+          }
+        } else {
+          for (let i = 0; i < containers.length; i++) {
+            containers[i].style.backdropFilter = 'none';
+          }
+        }
+      })
+    </script>
+</body>
+
+</html>

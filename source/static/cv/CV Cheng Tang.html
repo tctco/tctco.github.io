@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Cheng Tang</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto'>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
+  <style>
+    html,
+    body,
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      font-family: "Roboto", sans-serif
+    }
+  </style>
+</head>
+
+<body class="w3-light-grey">
+
+  <!-- Page Container -->
+  <div class="w3-content w3-margin-top" style="max-width:1400px;">
+
+    <!-- The Grid -->
+    <div class="w3-row-padding">
+
+      <!-- Left Column -->
+      <div class="w3-third">
+
+        <div class="w3-white w3-text-grey w3-card-4">
+          <div class="w3-display-container">
+            <img src="./pic.jpg" style="width:100%" alt="Avatar">
+            <div class="w3-display-bottomleft w3-container w3-text-black">
+              <h2>Cheng Tang</h2>
+            </div>
+          </div>
+          <div class="w3-container">
+            <p><i class="fa fa-briefcase fa-fw w3-margin-right w3-large w3-text-teal"></i>Medical & Computer Science
+              Student</p>
+            <p><i class="fa fa-hospital fa-fw w3-margin-right w3-large w3-text-teal"></i>Wuhan Union Hospital, Tongji
+              Medical College</p>
+            <p><i class="fa fa-envelope fa-fw w3-margin-right w3-large w3-text-teal"></i>chengtang@hust.edu.cn</p>
+            <p><i class="fa fa-phone fa-fw w3-margin-right w3-large w3-text-teal"></i>+86 15927203698</p>
+            <hr>
+
+            <p class="w3-large"><b><i class="fa fa-asterisk fa-fw w3-margin-right w3-text-teal"></i>Skills</b></p>
+            <ul>
+              <li>English: CET4, CET6</li>
+              <li>Biomedicine: Bioinformation, Biochemistry, Genetics, Immunology, Microbiology...</li>
+              <li>Others: Piano, Table Tennis, Taekwondo blue ribbon...</li>
+            </ul>
+
+
+            <p class="w3-large w3-text-theme"><b><i
+                  class="fa fa-code fa-fw w3-margin-right w3-text-teal"></i>Languages</b></p>
+            <ul>
+              <li>Python (PyTorch)</li>
+              <li>HTML / CSS / JavaScript</li>
+              <li>A little C / C++, Golang, Rust, SQL...</li>
+            </ul>
+
+            <p class="w3-large w3-text-theme"><b><i
+                  class="fa fa-certificate fa-fw w3-margin-right w3-text-teal"></i>Education</b></p>
+            Huazhong University of Science and Technology
+            <ul>
+              <li>Computer Science (B.S.)</li>
+              <li>Clinical Medicine (M.D.)</li>
+            </ul>
+            <br>
+          </div>
+        </div><br>
+
+        <!-- End Left Column -->
+      </div>
+
+      <!-- Right Column -->
+      <div class="w3-twothird">
+
+        <div class="w3-container w3-card w3-white w3-margin-bottom">
+          <h2 class="w3-text-grey w3-padding-16"><i
+              class="fa fa-suitcase fa-fw w3-margin-right w3-xxlarge w3-text-teal"></i>Projects</h2>
+          <div class="w3-container">
+            <h5 class="w3-opacity"><b>NaiveBehavLab：A Multi-Animal Behavior Analysis Tool Based on Pose Estimation</b>
+            </h5>
+            <h6 class="w3-text-teal"><i class="fa fa-calendar fa-fw w3-margin-right"></i>Aug 2021 - <span
+                class="w3-tag w3-teal w3-round">Current</span></h6>
+            <p>Graduation project for my minor. The software is intended to help researchers without any software
+              developing knowledge from department of neurobiology and neurosurgery department (Tongji Hospital) reduce
+              tedious labor work.
+            <ul>
+              <li>Combined lightweight Openpose with idTracker.ai for animal pose estimation and reliable multi-animal
+                tracking</li>
+              <li>Built a web-based multi-mice behavior analysis tool similar to DeepLabCut. The frontend is based on
+                React.js, antDesign, D3.js, Echarts, etc. The backend is based on Flask, PyTorch, sqlite, etc.</li>
+            </ul>
+            </p>
+            <img src="./14antsdemo.gif" style="display: block; width: 40%; margin-left: auto; margin-right:auto;" />
+            <hr>
+          </div>
+          <div class="w3-container">
+            <h5 class="w3-opacity"><b>TJPORT: BBS for Tongji Medical Students</b></h5>
+            <h6 class="w3-text-teal"><i class="fa fa-calendar fa-fw w3-margin-right"></i>Nov 2021 - <span
+                class="w3-tag w3-teal w3-round">Current</span></h6>
+            <p><a href="https://port.tjmedi.tech">TJPort</a> is a BBS based on NodeBB. It provides a platform for Q&A,
+              learning resources sharing, and online chatting.
+            </p><br>
+          </div>
+          <div class="w3-container">
+            <h5 class="w3-opacity"><b>Mouse Brain Reconstruction With Neurons Stained With Antibody to c-fos </b></h5>
+            <h6 class="w3-text-teal"><i class="fa fa-calendar fa-fw w3-margin-right"></i>Aug 2021 - Feb 2022</h6>
+            <p>
+            <ul>
+              <li>Reconstructed the 2D slices of mouse brain with neurons stained with antibody to c-fos protein for
+                better illustration. </li>
+              <li>The interactive reconstructed 3D model (rendered by Babylon.js) clearly demonstrated the activated
+                brain region when mice were socializing.</li>
+              <li>Built a <a href="https://github.com/tctco/cfosViewer">viewer</a> with tauri, a framework similar to
+                electron but written in Rust and relies on webview.</li>
+            </ul>
+            <iframe src="http://tctco.tech/static/model/"
+              style="display: block; width: 80%; min-height: 250px; margin-left: auto; margin-right:auto;"
+              scrolling="no"></iframe>
+            </p><br>
+          </div>
+          <div class="w3-container">
+            <h5 class="w3-opacity"><b>CNN-Based Monocular Depth Estimation Neural Network / MIT</b></h5>
+            <h6 class="w3-text-teal"><i class="fa fa-calendar fa-fw w3-margin-right"></i>Jun 2020 - Aug 2020</h6>
+            <p>Built a network for depth estimation during the course of Maching Learning+, a brief introduction online
+              course given by professors at MIT. Scored 92 / 100+ (with bonus points) of the course.</p><br>
+          </div>
+          <div class="w3-container">
+            <h5 class="w3-opacity"><b>An Interpretable Prognostic Approach for COVID-19 Patients Based on
+                Continuous-Time Hidden Markov Model / Center of Bioimaging and Bioinformation, HUST</b></h5>
+            <h6 class="w3-text-teal"><i class="fa fa-calendar fa-fw w3-margin-right"></i>Feb 2019 - Oct 2020</h6>
+            <p>
+            <ul>
+              <li>Utilized Continuous-Time Hidden Markov Model (CT-HMM) to model the progression of COVID-19 infected
+                patients. We collected data from 1559 patients and trained the model to deduce the hidden health status
+                (dying/cured) from biochemical tests and biomarkers.</li>
+              <li>Interpreted the calculated parameters given by the CT-HMM. We calculated the average and median time
+                of recovery and death and showed the that the patients were more likely to recover than deteriorate,
+                which suggests the treatment provided at Wuhan Union Hospital is likely to be effective.</li>
+              <li>Evaluated 12 biomarkers that had been suggested of prognostic value. We calculated the probability
+                distribution of death and recovery given different biochemical test results from the patients.</li>
+            </ul>
+            <img src="./CTHMM.png" style="width: 80%; margin-left: auto; margin-right: auto; display: block" />
+            </p>
+            <hr>
+          </div>
+          <div class="w3-container">
+            <h5 class="w3-opacity"><b>Summer Intership / <a href="https://www.bingyan.net/#/">Bingyan Studio</a></b>
+            </h5>
+            <h6 class="w3-text-teal"><i class="fa fa-calendar fa-fw w3-margin-right"></i>Jun 2018 - Aug 2018</h6>
+            <p>Summer internship as a backend developer at Bingyan Studio, one of the 3 major student associations in
+              HUST. Built an online <a href="https://github.com/tctco/bingyanFinal">shopping platform</a> based on Gin,
+              a framework written in Golang.</p><br>
+          </div>
+        </div>
+
+        <div class="w3-container w3-card w3-white w3-margin-bottom">
+          <h2 class="w3-text-grey w3-padding-16"><i
+              class="fa fa-trophy fa-fw w3-margin-right w3-xxlarge w3-text-teal"></i>Awards</h2>
+          <div class="w3-container">
+            <h5 class="w3-opacity"><b>Scholarship</b></h5>
+            <h6 class="w3-text-teal">Outstanding Students in Term of Academic Performance (Top 1%)</h6>
+            <h6 class="w3-text-teal">Academic Excellence Award</h6>
+            <h6 class="w3-text-teal">Innovation of Science and Technology Award</h6>
+            <hr>
+            <h5 class="w3-opacity"><b>Competition</b></h5>
+            <h6 class="w3-text-teal">National English Competition for College Students</h6>
+            <p>2nd Prize</p>
+            <h6 class="w3-text-teal">The Mathematical Contest in Modeling</h6>
+            <p>Honorable Mention (Captain & Student Advisor)</p>
+            <h6 class="w3-text-teal">The National Competition for undergraduate on Innovation Research & Experimental
+              Design in Basic Medical Sciences</h6>
+            <p>
+              Captain & Lecturer
+            <ul>
+              <li>Grand Prize</li>
+              <li>Best Presentation</li>
+              <li>Best Academic</li>
+            </ul>
+            </p>
+          </div>
+        </div>
+
+        <div class="w3-container w3-card w3-white">
+          <h2 class="w3-text-grey w3-padding-16"><i
+              class="fa fa-trophy fa-fw w3-margin-right w3-xxlarge w3-text-teal"></i>Motivation</h2>
+          <div class="w3-container">
+            I have such a strong passion in computer science and coding that I had once even decided to change my major
+            to CS at the beginning phase of my medical education. During my internship at hospital, however, I have
+            witnessed too many despair patients and their family in danger of collapse as they were suffering from
+            illnesses, of which many remain incurable, and these first-hand experiences make me feel it is still
+            extremely meaningful to help and cure.
+
+            <br /><br />
+
+            However, I am eager to combine my medical career and my passion on computer science to create something new,
+            and have made practical and steady efforts. Unfortunately, I am only able to explore the fields alone due to
+            the restrictions of my surrounding environment, a typical medical college with few experts in ML/AI. I got
+            to know MSRA in a selective course, of which the teacher was a former researcher at MSRA. From then on, I
+            have been anticipating to do scientific research and get fully trained at such a high-level institution, and
+            explore cutting-edge methods and tools. If I were able to have such an opportunity, I believe that such
+            experiences would bring profound benefits to my future medical research career.
+            <br /><br />
+          </div>
+        </div>
+
+        <!-- End Right Column -->
+      </div>
+
+      <!-- End Grid -->
+    </div>
+
+    <!-- End Page Container -->
+  </div>
+
+  <body class="w3-light-grey">
+
+    <!-- Page Container -->
+    <div class="w3-content w3-margin-top" style="max-width:1400px;">
+
+      <!-- The Grid -->
+      <div class="w3-row-padding">
+
+        <!-- Left Column -->
+        <div class="w3-third">
+
+          <div class="w3-white w3-text-grey w3-card-4">
+            <div class="w3-display-container">
+              <img src="./pic.jpg" style="width:100%" alt="Avatar">
+              <div class="w3-display-bottomleft w3-container w3-text-black">
+                <h2>Cheng Tang</h2>
+              </div>
+            </div>
+            <div class="w3-container">
+              <p><i class="fa fa-briefcase fa-fw w3-margin-right w3-large w3-text-teal"></i>临床医学与计算机科学</p>
+              <p><i class="fa fa-hospital fa-fw w3-margin-right w3-large w3-text-teal"></i>同济医学院，第一临床学院（协和医院）</p>
+              <p><i class="fa fa-envelope fa-fw w3-margin-right w3-large w3-text-teal"></i>chengtang@hust.edu.cn</p>
+              <p><i class="fa fa-phone fa-fw w3-margin-right w3-large w3-text-teal"></i>+86 15927203698</p>
+              <hr>
+
+              <p class="w3-large"><b><i class="fa fa-asterisk fa-fw w3-margin-right w3-text-teal"></i>特长</b></p>
+              <ul>
+                <li>英语: CET4, CET6</li>
+                <li>生物医学: 生物信息学，生物化学，遗传病学，免疫学，微生物学...</li>
+                <li>其他: 钢琴，乒乓球，跆拳道蓝带...</li>
+              </ul>
+
+
+              <p class="w3-large w3-text-theme"><b><i class="fa fa-code fa-fw w3-margin-right w3-text-teal"></i>编程语言</b>
+              </p>
+              <ul>
+                <li>Python (PyTorch)</li>
+                <li>HTML / CSS / JavaScript</li>
+                <li>A little C / C++, Golang, Rust, SQL...</li>
+              </ul>
+
+              <p class="w3-large w3-text-theme"><b><i
+                    class="fa fa-certificate fa-fw w3-margin-right w3-text-teal"></i>教育</b></p>
+              华中科技大学，同济医学院
+              <ul>
+                <li>计算机科学 学士</li>
+                <li>临床医学 博士（在读）</li>
+              </ul>
+              <br>
+            </div>
+          </div><br>
+
+          <!-- End Left Column -->
+        </div>
+
+        <!-- Right Column -->
+        <div class="w3-twothird">
+
+          <div class="w3-container w3-card w3-white w3-margin-bottom">
+            <h2 class="w3-text-grey w3-padding-16"><i
+                class="fa fa-suitcase fa-fw w3-margin-right w3-xxlarge w3-text-teal"></i>项目</h2>
+            <div class="w3-container">
+              <h5 class="w3-opacity"><b>NaiveBehavLab：基于姿态检测的多动物行为学分析工具</b></h5>
+              <h6 class="w3-text-teal"><i class="fa fa-calendar fa-fw w3-margin-right"></i>Aug 2021 - <span
+                  class="w3-tag w3-teal w3-round">至今</span></h6>
+              <p>辅修毕业设计。这项工作旨在帮助神经病理学系和同济医院神经外科降低他们在动物行为学实验中的繁杂工作。
+              <ul>
+                <li>结合lightweight OpenPose和idTracker.ai以进行动物姿态估计和可靠的多动物追踪</li>
+                <li>构建一个互联网应用。前端使用React.js、antDesign、D3.js、Echarts等。后端基于Flask、PyTorch、sqlite等。</li>
+              </ul>
+              </p>
+              <img src="./14antsdemo.gif" style="display: block; width: 40%; margin-left: auto; margin-right:auto;" />
+              <hr>
+            </div>
+            <div class="w3-container">
+              <h5 class="w3-opacity"><b>TJPORT：同济医学生论坛</b></h5>
+              <h6 class="w3-text-teal"><i class="fa fa-calendar fa-fw w3-margin-right"></i>Nov 2021 - <span
+                  class="w3-tag w3-teal w3-round">至今</span></h6>
+              <p><a href="https://port.tjmedi.tech">TJPort</a>基于NodeBB。为同学提供Q&A，学习资源分享还有线上聊天。
+              </p><br>
+            </div>
+            <div class="w3-container">
+              <h5 class="w3-opacity"><b>带有cfos染色神经元的小鼠大脑三维重建</b></h5>
+              <h6 class="w3-text-teal"><i class="fa fa-calendar fa-fw w3-margin-right"></i>Aug 2021 - Feb 2022</h6>
+              <p>
+              <ul>
+                <li>从带有cfos标记的小鼠大脑2D切片重建三维模型以利于数据可视化。</li>
+                <li>可交互的三维模型展示了小鼠进行社交行为时活跃的脑区和神经元。</li>
+                <li>构建一个<a href="https://github.com/tctco/cfosViewer">基于tauri的浏览器</a>。</li>
+              </ul>
+              <iframe src="https://tctco.pages.dev/static/model/"
+                style="display: block; width: 80%; min-height: 250px; margin-left: auto; margin-right:auto;"
+                scrolling="no"></iframe>
+              </p><br>
+            </div>
+            <div class="w3-container">
+              <h5 class="w3-opacity"><b>基于卷积神经网络的深度估计网络 / 麻省理工学院</b></h5>
+              <h6 class="w3-text-teal"><i class="fa fa-calendar fa-fw w3-margin-right"></i>Jun 2020 - Aug 2020</h6>
+              <p>线上课程机器学习+课程设计。机器学习+是麻省理工学院推出的线上学习课程。得分92+/100</p><br>
+            </div>
+            <div class="w3-container">
+              <h5 class="w3-opacity"><b>基于连续时间隐马尔可夫模型的可解释新冠病人预后预测方法 / 医学图像与医学信息处理中心，华中科技大学</b></h5>
+              <h6 class="w3-text-teal"><i class="fa fa-calendar fa-fw w3-margin-right"></i>Feb 2019 - Oct 2020</h6>
+              <p>
+              <ul>
+                <li>构建了一个连续时间隐马尔可夫模型以对感染新冠的病人进行建模。我们收集了1559个病人资料，通过其生化实验结果和生物标志物训练模型以推测病人的隐状态（死亡或治愈）</li>
+                <li>解读了模型给出的相关参数。我们计算了病人平均和中位治愈或死亡时间，发现病人显著更倾向于治愈。这证明武汉协和医院的处理手段很可能有益于康复。</li>
+                <li>评估了此前文献提出的12种生物标志物。我们计算了新冠病人得出相关生化测试结果的死亡和治愈概率。</li>
+              </ul>
+              <img src="./CTHMM.png" style="width: 80%; margin-left: auto; margin-right: auto; display: block" />
+              </p>
+              <hr>
+            </div>
+            <div class="w3-container">
+              <h5 class="w3-opacity"><b>暑期实习 / <a href="https://www.bingyan.net/#/">冰岩作坊</a></b></h5>
+              <h6 class="w3-text-teal"><i class="fa fa-calendar fa-fw w3-margin-right"></i>Jun 2018 - Aug 2018</h6>
+              <p>后端实习生。冰岩作坊是华中科技大学“三大互联网团队”之一。构建了一个基于Gin（用Golang写成）在线<a
+                  href="https://github.com/tctco/bingyanFinal">商城后端</a></p><br>
+            </div>
+          </div>
+
+          <div class="w3-container w3-card w3-white">
+            <h2 class="w3-text-grey w3-padding-16"><i
+                class="fa fa-trophy fa-fw w3-margin-right w3-xxlarge w3-text-teal"></i>荣誉</h2>
+            <div class="w3-container">
+              <h5 class="w3-opacity"><b>学业</b></h5>
+              <h6 class="w3-text-teal">启明学院特优生（年级第一）</h6>
+              <h6 class="w3-text-teal">学习优胜奖学金</h6>
+              <h6 class="w3-text-teal">科技创新奖学金</h6>
+              <hr>
+              <h5 class="w3-opacity"><b>竞赛</b></h5>
+              <h6 class="w3-text-teal">全国大学生英语竞赛</h6>
+              <p>二等奖</p>
+              <h6 class="w3-text-teal">美国数学建模竞赛</h6>
+              <p>Honorable Mention （队长&学生指导）</p>
+              <h6 class="w3-text-teal">全国大学生基础医学创新论坛暨实验设计大赛（校赛）</h6>
+              <p>
+                队长&汇报
+              <ul>
+                <li>特等奖</li>
+                <li>最佳风采奖</li>
+                <li>最佳学术奖</li>
+              </ul>
+              </p>
+            </div>
+          </div>
+
+          <div class="w3-container w3-card w3-white">
+            <h2 class="w3-text-grey w3-padding-16"><i
+                class="fa fa-trophy fa-fw w3-margin-right w3-xxlarge w3-text-teal"></i>动机</h2>
+            <div class="w3-container">
+              我发自内心的热爱计算机科学，也喜欢写代码，一度在刚开始医学学习的过程中想要转专业到计算机学院。但在临床见习中看到很多病人，和他们的家庭面对疾病的无奈，仍然觉得治病救人还是很有意义的。
+              <br /><br />
+              我热切地希望将自己的兴趣和从事的专业结合起来，也为此付出了实在的努力，但受限于环境的限制，在很长的一段时间内都只能在摸索中前行。我在一堂选修课上知道了MSRA，任课教师就曾在MSRA工作。我希望能够在这样一个高水平的研究机构中获得全面的训练，了解领域内的新工具和方法。如果能够成行，我想这样一种难得的经历将给我未来的医学研究生涯带来深远而有益的改变。
+              <br /><br />
+            </div>
+          </div>
+
+          <!-- End Right Column -->
+        </div>
+
+        <!-- End Grid -->
+      </div>
+
+      <!-- End Page Container -->
+    </div>
+
+    <!-- Footer. This section contains an ad for W3Schools Spaces. You can leave it to support us. -->
+    <footer class="w3-container w3-teal w3-center w3-margin-top">
+      <a href="https://github.com/tctco"><i class="fa-brands fa-github w3-hover-opacity"></i></a>
+  </body>
+
+</html>
