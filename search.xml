@@ -4,6 +4,19 @@
   
     
     <entry>
+      <title>用VSCode写cpp项目</title>
+      <link href="/2025/11/28/%E7%94%A8VSCode%E5%86%99cpp%E9%A1%B9%E7%9B%AE/"/>
+      <url>/2025/11/28/%E7%94%A8VSCode%E5%86%99cpp%E9%A1%B9%E7%9B%AE/</url>
+      
+        <content type="html"><![CDATA[<ol><li>用conan管理包感觉必vcpkg靠谱：一些库在conan里有，vcpkg没有</li><li>vscode/cursor没有cpp的intellisense，可以如下解决：</li><li><code>CMakeLists.txt</code>中添加<code>set(CMAKE_EXPORT_COMPILE_COMMANDS ON)</code></li><li><code>.vscode/settings.json</code>中添加 <code>&quot;C_Cpp.default.compileCommands&quot;: &quot;${workspaceFolder}/build/compile_commands.json&quot;</code></li></ol><p>即使cmake文件与cpp代码在某个子目录中（如<code>localizer/src</code>）也可以呈现正常的高亮。</p><p>参考文献</p><ul><li><a href="https://stackoverflow.com/questions/58077908/linking-conan-include-to-vs-code">linking-conan-include-to-vs-code</a></li></ul>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>解决：ChatGPT提示所在的地区或国家不支持</title>
       <link href="/2025/11/27/%E8%A7%A3%E5%86%B3%EF%BC%9AChatGPT%E6%8F%90%E7%A4%BA%E6%89%80%E5%9C%A8%E7%9A%84%E5%9C%B0%E5%8C%BA%E6%88%96%E5%9B%BD%E5%AE%B6%E4%B8%8D%E6%94%AF%E6%8C%81/"/>
       <url>/2025/11/27/%E8%A7%A3%E5%86%B3%EF%BC%9AChatGPT%E6%8F%90%E7%A4%BA%E6%89%80%E5%9C%A8%E7%9A%84%E5%9C%B0%E5%8C%BA%E6%88%96%E5%9B%BD%E5%AE%B6%E4%B8%8D%E6%94%AF%E6%8C%81/</url>
