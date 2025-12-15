@@ -4,6 +4,19 @@
   
     
     <entry>
+      <title>解决python中requests等代理配置问题</title>
+      <link href="/2025/12/14/%E8%A7%A3%E5%86%B3python%E4%B8%ADrequests%E7%AD%89%E4%BB%A3%E7%90%86%E9%85%8D%E7%BD%AE%E9%97%AE%E9%A2%98/"/>
+      <url>/2025/12/14/%E8%A7%A3%E5%86%B3python%E4%B8%ADrequests%E7%AD%89%E4%BB%A3%E7%90%86%E9%85%8D%E7%BD%AE%E9%97%AE%E9%A2%98/</url>
+      
+        <content type="html"><![CDATA[<p>由于一些原因，在hugging face中拉取model可能会遇到问题：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">python .\infer.py</span><br><span class="line">Loading DLC 3.0.0rc13...</span><br><span class="line">Loading.... superanimal_topviewmouse_resnet_50</span><br><span class="line">&#x27;[WinError 10061] 由于目标计算机积极拒绝，无法连接。&#x27; thrown while requesting HEAD https://huggingface.co/mwmathis/DeepLabCutModelZoo-SuperAnimal-TopViewMouse/resolve/main/superanimal_topviewmouse_resnet_50.pt</span><br><span class="line">Retrying in 1s [Retry 1/5].</span><br></pre></td></tr></table></figure><p>可以在代码头添加proxy（win下一样可用）</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">os.environ[<span class="string">&#x27;HTTP_PROXY&#x27;</span>] = <span class="string">&#x27;http://127.0.0.1:10809&#x27;</span></span><br><span class="line">os.environ[<span class="string">&#x27;HTTPS_PROXY&#x27;</span>] = <span class="string">&#x27;http://127.0.0.1:10809&#x27;</span></span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>AGENTS</title>
       <link href="/2025/12/04/AGENTS/"/>
       <url>/2025/12/04/AGENTS/</url>
