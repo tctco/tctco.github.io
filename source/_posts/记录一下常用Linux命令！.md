@@ -13,6 +13,8 @@ git clone https://gitee.com/Annihilater/zsh-syntax-highlighting.git $ZSH_CUSTOM/
 
 ZSH_THEME="agnoster"
 
+plugins=(git zsh-syntax-highlighting zsh-autosuggestions)
+
 sudo apt install fonts-powerline
 ```
 
@@ -288,3 +290,7 @@ rsync -av --delete /path/to/source/ /path/to/destination/
 - a：归档模式，保留文件权限、时间等；
 - v：显示详细信息；
 - -delete：删除目标中源中已不存在的文件，实现真正意义的“同步”。
+
+
+## github ssh key
+
