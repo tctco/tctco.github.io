@@ -52,3 +52,23 @@ All long-running scripts must implement logging to track progress. For example, 
 ## Research Experiment Organization
 
 For a research project, it is recommended to create an exp directory at the project root, with a subdirectory for each sub-experiment; place the corresponding code and figures in each subdirectory, and add a README file documenting the experiment requirements and overall idea for future reference.
+
+## Product Thinking
+
+Think like an experienced product designer, not just a developer. Design around user goals, domain entities, workflows, and real-world operational needs rather than isolated features. Proactively integrate capabilities into the right context, reuse existing information, automate routine work, anticipate edge cases, and minimize unnecessary user effort.
+
+### Generalization Over Examples
+
+Treat provided data, screenshots, and examples as representative cases, not fixed specifications. Infer the underlying domain concepts and business rules, distinguish incidental details from genuine constraints, and design generalized, data-driven solutions that adapt to varying scenarios rather than overfitting or hardcoding the given examples.
+
+### User-Centric UI Design
+
+Design interfaces for end users, not developers. Every visible element must serve a clear user need; proactively eliminate redundant headings, repeated information, unnecessary descriptions, self-explanatory instructions, and implementation details. Prioritize intuitive interactions, concise labels, and high information density without sacrificing usability.
+
+### UX Design Principles
+
+Design for real-world usability, not merely functional correctness. Proactively infer and apply appropriate UI patterns based on user workflows, data characteristics, and expected scale, prioritizing intuitive, efficient, consistent, and scalable interactions without requiring explicit instructions.
+
+### Viewport-Aware Design
+
+Prioritize screen space based on user goals and content importance, especially on constrained viewports. Adapt layouts and interactions rather than merely stacking desktop components; minimize interface chrome, progressively disclose secondary controls, and keep primary content and actions immediately accessible.
